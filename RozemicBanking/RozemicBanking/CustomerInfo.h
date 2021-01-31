@@ -40,7 +40,7 @@
 			std::string address;
 			std::string city;
 			std::string state;
-			int zipcode;
+			std::string zipcode;
 			
 			//Overloaded stream Operator
 			friend std::ostream& operator<<(std::ostream& ooutput, const CustomerInfo& info);
@@ -54,7 +54,7 @@
 						 std::string address = "N/A",
 						 std::string city = "N/A",
 						 std::string state = "N/A",
-						 int zip = 10001);
+						 std::string zip = "N/A");
 			
 			//Copy Constructor
 			CustomerInfo(const CustomerInfo& value);
@@ -82,7 +82,7 @@
 	};
 	
 	//Constructor
-	CustomerInfo::CustomerInfo(std::string f, std::string l, std::string a, std::string c, std::string s, int z)
+	CustomerInfo::CustomerInfo(std::string f, std::string l, std::string a, std::string c, std::string s,std::string z)
 	{
 		this->firstname = f;
 		this->lastname = l;
@@ -118,12 +118,12 @@
 	
 	std::ostream& operator<<(std::ostream& ooutput, const CustomerInfo& info)
 	{
-		ooutput << "First Name: " 	<< info.firstname << "\n";
-		ooutput << "Last Name: "  	<< info.lastname << "\n";
-		ooutput << "Address: " 		<< info.address << "\n";
-		ooutput << "City: " 		<< info.city << "\n";
-		ooutput << "State: " 		<< info.state << "\n";
-		ooutput << "Zip Code:" 		<< info.zipcode << "\n";		
+		ooutput << "First Name:\t" 	<< info.firstname << "\n";
+		ooutput << "Last Name:\t"  	<< info.lastname << "\n";
+		ooutput << "Address:\t" 		<< info.address << "\n";
+		ooutput << "City:\t\t" 		<< info.city << "\n";
+		ooutput << "State:\t\t" 		<< info.state << "\n";
+		ooutput << "Zip Code:\t" 		<< info.zipcode << "\n";		
 	}
 	
 	#endif
