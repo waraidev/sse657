@@ -20,6 +20,7 @@ public:
     string sellerId;
 
     Payment(double amount, string purchaserId, string sellerId);
+
 private:
 
 };
