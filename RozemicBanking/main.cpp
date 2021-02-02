@@ -9,6 +9,7 @@
 #include <string>
 #include <array>
 #include "CustomerInfo.h"
+#include "UserAccount.h"
 
 using namespace std;
 
@@ -74,15 +75,21 @@ array<string, 6> customerHome(string firstname = "N/A", string lastname = "N/A",
 
 }
 
-
 int main(void) {
     array<string, 6> customer;
-
+    double initBalance;    
 
     customer = customerHome("John", "Doe");
 
-    CustomerInfo newCustomer(customer[0], customer[1], customer[2], customer[3], customer[4], customer[5]);
-    cout << newCustomer << "\n";
+    cout << "What is your initial balance?\n" << endl;
+
+    cin >> initBalance;
+
+    UserAccount account(initBalance);
+
+    account.setCustomer(CustomerInfo(customer[0], customer[1], customer[2], customer[3], customer[4], customer[5]));
+
+    cout << account.getCustomer() << "\n";
 
     return 0;
 }

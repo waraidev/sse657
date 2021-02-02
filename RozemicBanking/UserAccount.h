@@ -5,6 +5,8 @@
 #ifndef SSE657_USERACCOUNT_H
 #define SSE657_USERACCOUNT_H
 
+#include "CustomerInfo.h"
+
 
 using namespace std;
 
@@ -13,6 +15,8 @@ class UserAccount {
 
 private:
     double balance;
+
+    CustomerInfo customer;
 
 public:
     UserAccount();
@@ -25,11 +29,10 @@ public:
 
     double getBalance();
 
-};
+    CustomerInfo getCustomer();
 
-/** Constructs a user account with a balance of zero. */
-UserAccount::UserAccount() {
-    balance = 0;
-}
+    CustomerInfo setCustomer(CustomerInfo c);
+
+};
 
 #endif //SSE657_USERACCOUNT_H

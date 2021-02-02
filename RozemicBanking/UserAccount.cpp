@@ -4,6 +4,12 @@
 
 #include "UserAccount.h"
 
+using namespace std;
+
+/** Constructs a user account with a balance of zero. */
+UserAccount::UserAccount() {
+    balance = 0;
+}
 
 /**
  * Constructs a user account with a given balance.
@@ -11,6 +17,23 @@
  */
 UserAccount::UserAccount(double initialBalance) {
     balance = initialBalance;
+}
+
+/**
+ * Gets the CustomerInfo object associated
+ * with the UserAccount
+ */
+CustomerInfo UserAccount::getCustomer() {
+    return customer;
+}
+
+/**
+ * Gets the CustomerInfo object associated
+ * with the UserAccount
+ */
+CustomerInfo UserAccount::setCustomer(CustomerInfo c) {
+    customer = c;
+    return customer;
 }
 
 /**
