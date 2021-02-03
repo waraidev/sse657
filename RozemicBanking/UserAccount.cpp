@@ -8,7 +8,7 @@ using namespace std;
 
 /** Constructs a user account with a balance of zero. */
 UserAccount::UserAccount() {
-    balance = 0;
+    this->balance = 0;
 }
 
 /**
@@ -16,7 +16,7 @@ UserAccount::UserAccount() {
  * @param initialBalance The initial balance.
  */
 UserAccount::UserAccount(double initialBalance) {
-    balance = initialBalance;
+    this->balance = initialBalance;
 }
 
 /**
@@ -24,7 +24,7 @@ UserAccount::UserAccount(double initialBalance) {
  * with the UserAccount
  */
 CustomerInfo UserAccount::getCustomer() {
-    return customer;
+    return this->customer;
 }
 
 /**
@@ -32,8 +32,8 @@ CustomerInfo UserAccount::getCustomer() {
  * with the UserAccount
  */
 CustomerInfo UserAccount::setCustomer(CustomerInfo c) {
-    customer = c;
-    return customer;
+    this->customer = c;
+    return c;
 }
 
 /**
@@ -41,7 +41,7 @@ CustomerInfo UserAccount::setCustomer(CustomerInfo c) {
  * @param amount The amount to deposit.
  */
 void UserAccount::deposit(double amount) {
-    balance = balance + amount;
+    this->balance += amount;
 }
 
 /**
@@ -49,7 +49,7 @@ void UserAccount::deposit(double amount) {
  * @param amount The amount to withdraw.
  */
 void UserAccount::withdraw(double amount) {
-    balance = balance - amount;
+    this->balance -= amount;
 }
 
 /**
@@ -57,5 +57,5 @@ void UserAccount::withdraw(double amount) {
  * @return The current balance.
  */
 double UserAccount::getBalance() {
-    return balance;
+    return this->balance;
 }

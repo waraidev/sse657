@@ -8,7 +8,6 @@
 #include <iostream>
 #include <string>
 #include <array>
-#include "CustomerInfo.h"
 #include "UserAccount.h"
 
 using namespace std;
@@ -89,7 +88,7 @@ int main(void) {
 
     account.setCustomer(CustomerInfo(customer[0], customer[1], customer[2], customer[3], customer[4], customer[5]));
 
-    cout << account.getCustomer() << "\n";
+    cout << account.getCustomer().printInfo() << "\n";
 
     return 0;
 }

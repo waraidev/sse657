@@ -6,8 +6,6 @@
 #include <thread>
 #include <mutex>
 
-using namespace std;
-
 //	mutex mutually;
 //
 //	//Setup For Multithreaded Code
@@ -33,26 +31,53 @@ using namespace std;
 
 class CustomerInfo {
 private:
-    string firstname;
-    string lastname;
-    string address;
-    string city;
-    string state;
-    string zipcode;
+    std::string firstname;
+    std::string lastname;
+    std::string address;
+    std::string city;
+    std::string state;
+    std::string zipcode;
 
     //Overloaded stream Operator
-    friend ostream &operator<<(ostream &output, const CustomerInfo &info);
+    //friend std::ostream &operator<<(std::ostream &output, CustomerInfo &info);
 
 protected:
 
 public:
+
+    //Getters
+    std::string getFirstName();
+
+    std::string getLastName();
+
+    std::string getAddress();
+
+    std::string getCity();
+
+    std::string getState();
+
+    std::string getZipCode();
+
+    //Setters
+    std::string setFirstName(std::string first);
+
+    std::string setLastName(std::string last);
+
+    std::string setAddress(std::string address);
+
+    std::string setCity(std::string city);
+
+    std::string setState(std::string state);
+
+    std::string setZipCode(std::string zip);
+
     //Constructor
-    CustomerInfo(string firstname = "N/A",
-                 string lastname = "N/A",
-                 string address = "N/A",
-                 string city = "N/A",
-                 string state = "N/A",
-                 string zip = "N/A");
+    CustomerInfo(std::string firstname = "N/A",
+                 std::string lastname = "N/A",
+                 std::string address = "N/A",
+                 std::string city = "N/A",
+                 std::string state = "N/A",
+                 std::string zip = "N/A");
 
     //Copy Constructor
     CustomerInfo(const CustomerInfo &value);
@@ -60,11 +85,14 @@ public:
     //Overloaded Assignment
     CustomerInfo &operator=(CustomerInfo &unknown);
 
+    //Overloaded stream Operator
+    //friend std::ostream &operator<<(std::ostream &output, CustomerInfo &info);
+
     //Destructor
     ~CustomerInfo();
 
     //Insert
-    void insert(const string &words);
+    void insert(const std::string &words);
 
     //swap Function
     void swap(CustomerInfo &lhs, CustomerInfo &rhs) {
@@ -76,11 +104,13 @@ public:
         swap(lhs.state, rhs.state);
         swap(lhs.zipcode, rhs.zipcode);
     }
+
+    std::string printInfo();
 };
 
 //Constructor
-CustomerInfo::CustomerInfo(string first, string last, string address, 
-        string city, string state, string zip) {
+CustomerInfo::CustomerInfo(std::string first, std::string last, std::string address, 
+        std::string city, std::string state, std::string zip) {
     this->firstname = first;
     this->lastname = last;
     this->address = address;
@@ -99,26 +129,9 @@ CustomerInfo::CustomerInfo(const CustomerInfo &value) {
     this->zipcode = value.zipcode;
 }
 
-//Overloaded Assignment
-CustomerInfo &CustomerInfo::operator=(CustomerInfo &unknown) {
-    swap(*this, unknown);
-    return *this;
-}
-
 //Destructor
 CustomerInfo::~CustomerInfo() {
-    cout << "Destructor Called\n";
-}
-
-ostream &operator<<(ostream &output, const CustomerInfo &info) {
-    output << "First Name:\t" << info.firstname << "\n";
-    output << "Last Name:\t" << info.lastname << "\n";
-    output << "Address:\t" << info.address << "\n";
-    output << "City:\t\t" << info.city << "\n";
-    output << "State:\t\t" << info.state << "\n";
-    output << "Zip Code:\t" << info.zipcode << "\n";
-
-    return output;
+    std::cout << "Destructor Called\n";
 }
 
 #endif

@@ -7,9 +7,6 @@
 
 #include "CustomerInfo.h"
 
-
-using namespace std;
-
 /** A user account that has a balance that can be changed by deposits and withdrawals. */
 class UserAccount {
 
