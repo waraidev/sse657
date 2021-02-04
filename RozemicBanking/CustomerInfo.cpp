@@ -84,7 +84,7 @@ string CustomerInfo::printInfo() {
 		+ "Last Name:\t" + this->lastname + "\n"
     	+ "Address:\t" + this->address + "\n"
     	+ "City:\t\t" + this->city + "\n"
-    	+ "State:\t\t" + this->state + "\n";
+    	+ "State:\t\t" + this->state + "\n"
     	+ "Zip Code:\t" + this->zipcode + "\n";
 }
 

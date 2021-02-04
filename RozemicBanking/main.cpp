@@ -8,7 +8,8 @@
 #include <iostream>
 #include <string>
 #include <array>
-#include "UserAccount.h"
+#include "UserAccount.cpp"
+#include "CustomerInfo.cpp"
 
 using namespace std;
 
@@ -80,7 +81,7 @@ int main(void) {
 
     customer = customerHome("John", "Doe");
 
-    cout << "What is your initial balance?\n" << endl;
+    cout << "What is your initial balance?" << endl;
 
     cin >> initBalance;
 

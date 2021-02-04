@@ -6,8 +6,5 @@ set(CMAKE_CXX_STANDARD 14)
 add_executable(sse657
         RozemicBanking/main.cpp 
         RozemicBanking/Payment.cpp 
-        RozemicBanking/Payment.h 
-        RozemicBanking/UserAccount.cpp 
-        RozemicBanking/UserAccount.h
-        RozemicBanking/CustomerInfo.cpp
-        RozemicBanking/CustomerInfo.h)
+        RozemicBanking/Payment.h
+        )
