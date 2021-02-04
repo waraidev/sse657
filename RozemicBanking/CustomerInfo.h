@@ -92,6 +92,8 @@ class CustomerInfo
         }
 
         std::string printInfo();
+
+        //friend std::ostream &operator<<(std::ostream out, CustomerInfo &info);
 };
 
 //Constructor

@@ -96,6 +96,7 @@ int main(void) {
     account.setCustomer(CustomerInfo(customer[0], customer[1], customer[2], customer[3], customer[4], customer[5]));
 
     cout << account.getCustomer().printInfo() << endl;
+    //cout << account.getCustomer() << endl;
     cout << "Your checking balance is $" << account.getBalance(false) << endl;
     cout << "Your savings balance is $" << account.getBalance(true) << endl;
 

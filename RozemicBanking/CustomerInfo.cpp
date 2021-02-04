@@ -67,18 +67,6 @@ CustomerInfo &CustomerInfo::operator=(CustomerInfo &unknown) {
     return *this;
 }
 
-// ostream &operator<<(std::ostream &output, CustomerInfo &info) {
-//     output << "First Name:\t" << info.getFirstName() << "\n";
-//     output << "Last Name:\t" << info.getLastName() << "\n";
-//     output << "Address:\t" << info.getAddress() << "\n";
-//     output << "City:\t\t" << info.getCity() << "\n";
-//     output << "State:\t\t" << info.getState() << "\n";
-//     output << "Zip Code:\t" << info.getZipCode() << "\n";
-
-//     return output;
-
-// }
-
 string CustomerInfo::printInfo() {
 	return "First Name:\t" + this->firstname + "\n"
 		+ "Last Name:\t" + this->lastname + "\n"
