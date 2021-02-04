@@ -45,23 +45,6 @@ class CustomerInfo
     protected:
 
     public:
-
-        //Getters
-        std::string getFirstName();
-        std::string getLastName();
-        std::string getAddress();
-        std::string getCity();
-        std::string getState();
-        std::string getZipCode();
-
-        //Setters
-        std::string setFirstName(std::string first);
-        std::string setLastName(std::string last);
-        std::string setAddress(std::string address);
-        std::string setCity(std::string city);
-        std::string setState(std::string state);
-        std::string setZipCode(std::string zip);
-
         //Constructor
         CustomerInfo(std::string firstname = "N/A",
                         std::string lastname = "N/A",
