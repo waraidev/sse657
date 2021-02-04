@@ -35,3 +35,6 @@
 .DS_Store
 .vscode
 *.code-workspace
+
+#CMake
+build

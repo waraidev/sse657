@@ -5,9 +5,6 @@
 #ifndef SSE657_USERACCOUNT_H
 #define SSE657_USERACCOUNT_H
 
-
-using namespace std;
-
 /** A user account that has a balance that can be changed by deposits and withdrawals. */
 class UserAccount {
 
