@@ -11,7 +11,8 @@
 class UserAccount {
 
 private:
-    double balance;
+    double checkingBalance;
+    double savingsBalance;
 
     CustomerInfo customer;
 
@@ -20,11 +21,13 @@ public:
 
     UserAccount(double initialBalance);
 
-    void deposit(double amount);
+    void deposit(double amount, bool isSavings);
 
     void withdraw(double amount);
 
-    double getBalance();
+    void transfer(char sending, char receiving, double amount);
+
+    double getBalance(bool isSavings);
 
     CustomerInfo getCustomer();
 

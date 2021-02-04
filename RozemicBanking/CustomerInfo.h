@@ -120,7 +120,7 @@ CustomerInfo::CustomerInfo(const CustomerInfo &value)
 //Destructor
 CustomerInfo::~CustomerInfo() 
 {
-    std::cout << "Destructor Called\n";
+    //std::cout << "Destructor Called\n";
 }
 
 #endif

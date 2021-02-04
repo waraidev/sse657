@@ -31,6 +31,7 @@ array<string, 6> customerHome(string firstname = "N/A", string lastname = "N/A",
         cout << "Enter First Name:\n";
         cin >> input1;
         firstname = input1;
+        cout << endl;
     }
 
 
@@ -38,10 +39,11 @@ array<string, 6> customerHome(string firstname = "N/A", string lastname = "N/A",
         cout << "Enter Last Name:\n";
         cin >> input1;
         lastname = input1;
+        cout << endl;
     }
 
     if (address == "N/A") {
-        cout << "Enter Address:\n";
+        cout << "Enter Address: (Hit ENTER twice!)" << endl;
         /***************************************************
         Use getline to allow input that will be more than a
         word long.
@@ -49,24 +51,28 @@ array<string, 6> customerHome(string firstname = "N/A", string lastname = "N/A",
         getline(cin, input1);
         cin.ignore();
         address = input1;
+        cout << endl;
     }
 
     if (city == "N/A") {
         cout << "Enter City:\n";
         cin >> input1;
         city = input1;
+        cout << endl;
     }
 
     if (state == "N/A") {
         cout << "Enter State:\n";
         cin >> input1;
         state = input1;
+        cout << endl;
     }
 
     if (zip == "N/A") {
         cout << "Enter Zip Code:\n";
         cin >> input1;
         zip = input1;
+        cout << endl;
     }
 
     array<string, 6> newcustomer = {firstname, lastname, address, city, state, zip};
@@ -89,7 +95,61 @@ int main(void) {
 
     account.setCustomer(CustomerInfo(customer[0], customer[1], customer[2], customer[3], customer[4], customer[5]));
 
-    cout << account.getCustomer().printInfo() << "\n";
+    cout << account.getCustomer().printInfo() << endl;
+    cout << "Your checking balance is $" << account.getBalance(false) << endl;
+    cout << "Your savings balance is $" << account.getBalance(true) << endl;
+
+    char withdraw;
+    double amount;
+    char accountType;
+    bool savings;
+
+    cout << "Do you want to withdraw or deposit?\n Choose W or D: ";
+
+    cin >> withdraw;
+    cout << endl;
+
+    switch (withdraw)
+    {
+    case 'W':
+        cout << "How much do you want to withdraw? ";
+        cin >> amount;
+        account.withdraw(amount);
+        break;
+    
+    case 'D':
+        cout << "Do you want to deposit to checking or savings?\n Choose C or S: ";
+        cin >> accountType;
+        cout << endl;
+        switch(accountType)
+        {
+            case 'C':
+                savings = false;
+                cout << "How much do you want to deposit? ";
+                cin >> amount;
+                break;
+
+            case 'S':
+                savings = true;
+                cout << "How much do you want to deposit? ";
+                cin >> amount;
+                break;
+
+            default:
+                cout << "Incorrect choice!" << endl;
+                amount = 0;
+                break;
+        }
+
+        account.deposit(amount, savings);
+        break;
+        
+
+    default:
+        cout << "Incorrect choice!" << endl;
+        break;
+    }
+
 
     return 0;
 }
