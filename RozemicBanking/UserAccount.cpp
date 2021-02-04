@@ -39,7 +39,7 @@ CustomerInfo UserAccount::setCustomer(CustomerInfo c) {
 }
 
 /**
- * Deposits money into the user's account.
+ * Deposits money into the user's checking or savings account.
  * @param amount The amount to deposit.
  */
 void UserAccount::deposit(double amount, bool isSavings) {
@@ -65,7 +65,7 @@ void UserAccount::deposit(double amount, bool isSavings) {
 }
 
 /**
- * Withdraws money into the bank account.
+ * Withdraws money into the user's checking account.
  * @param amount The amount to withdraw.
  */
 void UserAccount::withdraw(double amount) {
@@ -77,6 +77,21 @@ void UserAccount::withdraw(double amount) {
     cout << amount;
     cout << "): $";
     cout << this->checkingBalance << endl;
+}
+
+void UserAccount::transfer(char sending, char receiving, double amount) {
+    if(sending == 'C' && receiving == 'S') {
+        this->checkingBalance -= amount;
+        this->savingsBalance += amount;
+    } else if(sending == 'S' && receiving == 'C') {
+        this->savingsBalance -= amount;
+        this->checkingBalance += amount;
+    } else {
+        cout << "Error in input: No funds were transferred." << endl;
+    }
+
+    cout << "Your checking balance is $" << this->checkingBalance << endl;
+    cout << "Your savings balance is $" << this->savingsBalance << endl; 
 }
 
 /**

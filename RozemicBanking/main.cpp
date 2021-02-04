@@ -85,6 +85,7 @@ int main(void) {
     array<string, 6> customer;
     double initBalance;    
 
+    //Setup customer account//
     customer = customerHome("John", "Doe");
 
     cout << "What is your initial balance?" << endl;
@@ -100,18 +101,26 @@ int main(void) {
     cout << "Your checking balance is $" << account.getBalance(false) << endl;
     cout << "Your savings balance is $" << account.getBalance(true) << endl;
 
-    char withdraw;
+    //Account Services//
+    char service;
     double amount;
+
+    //Depositing
     char accountType;
     bool savings;
 
-    cout << "Do you want to withdraw or deposit?\n Choose W or D: ";
+    //Transfer
+    string sending;
+    char verifyTransfer;
 
-    cin >> withdraw;
+    cout << "Do you want to withdraw, deposit, or transfer?\n";
+    cout << "Withdraw: (W)\nDeposit (D)\nTransfer (T)\nExit (E)\n" << "Choose an option: ";
+
+    cin >> service;
     cout << endl;
 
-    switch (withdraw)
-    {
+    switch (service)
+    {   //Withdrawing and Depositing//
     case 'W':
         cout << "How much do you want to withdraw? ";
         cin >> amount;
@@ -144,12 +153,50 @@ int main(void) {
 
         account.deposit(amount, savings);
         break;
+    
+    case 'T':   //Transferring money
+        
+        cout << "From Account (Checking or Savings): ";
+        cin >> sending;
+        if(tolower(sending[0]) == 'c') {
+            cout << "\nTransfer Type: Checking --> Savings (Yes or No)" << endl;
+            cout << "Choose Y/N: ";
+            cin >> verifyTransfer;
+            cout << endl;
+            if(verifyTransfer == 'Y') {
+                cout << "How much do you want to transfer? ";
+                cin >> amount;
+                account.transfer('C', 'S', amount); //Transfer from Checking to Savings
+            } else {
+                cout << "No money was transferred." << endl;
+            }
+        } else if(tolower(sending[0]) == 's') {
+            cout << "\nTransfer Type: Savings --> Checking (Yes or No)" << endl;
+            cout << "Choose Y/N: ";
+            cin >> verifyTransfer;
+            cout << endl;
+            if(verifyTransfer == 'Y') {
+                cout << "How much do you want to transfer? ";
+                cin >> amount;
+                account.transfer('S', 'C', amount); //Transfer from Savings to Checking
+            } else {
+                cout << "No money was transferred." << endl;
+            }
+        } else {
+            cout << "Error: Incorrect input. No money was transferred." << endl;
+        }
+        break;
         
 
     default:
         cout << "Incorrect choice!" << endl;
         break;
     }
+
+    cout << endl;
+
+    //Finishing Bank Use//
+    cout << "Thank you for choosing Rozemic Banking! Have a great day!" << endl;
 
 
     return 0;
