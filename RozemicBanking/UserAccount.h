@@ -5,28 +5,34 @@
 #ifndef SSE657_USERACCOUNT_H
 #define SSE657_USERACCOUNT_H
 
+#include "CustomerInfo.h"
+
 /** A user account that has a balance that can be changed by deposits and withdrawals. */
 class UserAccount {
 
 private:
-    double balance;
+    double checkingBalance;
+    double savingsBalance;
+
+    CustomerInfo customer;
 
 public:
     UserAccount();
 
     UserAccount(double initialBalance);
 
-    void deposit(double amount);
+    void deposit(double amount, bool isSavings);
 
     void withdraw(double amount);
 
-    double getBalance();
+    void transfer(char sending, char receiving, double amount);
+
+    double getBalance(bool isSavings);
+
+    CustomerInfo getCustomer();
+
+    CustomerInfo setCustomer(CustomerInfo c);
 
 };
-
-/** Constructs a user account with a balance of zero. */
-UserAccount::UserAccount() {
-    balance = 0;
-}
 
 #endif //SSE657_USERACCOUNT_H
