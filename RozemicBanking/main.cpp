@@ -114,12 +114,12 @@ int main(void) {
     char verifyTransfer;
 
     cout << "Do you want to withdraw, deposit, or transfer?\n";
-    cout << "Withdraw: (W)\nDeposit (D)\nTransfer (T)\nExit (E)\n" << "Choose an option: ";
+    cout << "Withdraw: (W)\nDeposit: (D)\nTransfer: (T)\nExit: (E)\n" << "Choose an option: ";
 
     cin >> service;
     cout << endl;
 
-    switch (service)
+    switch (toupper(service))
     {   //Withdrawing and Depositing//
     case 'W':
         cout << "How much do you want to withdraw? ";
@@ -131,7 +131,7 @@ int main(void) {
         cout << "Do you want to deposit to checking or savings?\n Choose C or S: ";
         cin >> accountType;
         cout << endl;
-        switch(accountType)
+        switch(toupper(accountType))
         {
             case 'C':
                 savings = false;
@@ -163,7 +163,7 @@ int main(void) {
             cout << "Choose Y/N: ";
             cin >> verifyTransfer;
             cout << endl;
-            if(verifyTransfer == 'Y') {
+            if(verifyTransfer == 'Y' || verifyTransfer == 'y') {
                 cout << "How much do you want to transfer? ";
                 cin >> amount;
                 account.transfer('C', 'S', amount); //Transfer from Checking to Savings
@@ -175,7 +175,7 @@ int main(void) {
             cout << "Choose Y/N: ";
             cin >> verifyTransfer;
             cout << endl;
-            if(verifyTransfer == 'Y') {
+            if(verifyTransfer == 'Y' || verifyTransfer == 'y') {
                 cout << "How much do you want to transfer? ";
                 cin >> amount;
                 account.transfer('S', 'C', amount); //Transfer from Savings to Checking
