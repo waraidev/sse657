@@ -55,12 +55,12 @@
 			double Withdrawl(double withdraw) override {
 				double temp = checkingBalance;
 				checkingBalance = checkingBalance - withdraw;
-				if(checkingBalance < 0 && checkingBalance > - 5)
+				if(checkingBalance < 0 && checkingBalance >= - 5)
 				{
 					std::cout << "Your Checking Is Below $0.00" << "\n";
 					return checkingBalance;
 				}
-				else if(checkingBalance < -5 && checkingBalance > -50)
+				else if(checkingBalance < -5 && checkingBalance >= -50)
 				{
 					std::cout << "Your Checking Is Below $(5.00)" << "\n";
 					std::cout << "As A Result Your Account Will Incur a $15.00 Charge." << "\n";
