@@ -1,9 +1,38 @@
 
 #include <iostream>
 #include <string>
-#include "CustomerInfo.h"
+#include "Access.h"
 	
 using namespace std;
+
+//Constructor
+CustomerInfo::CustomerInfo(std::string first, std::string last, std::string address, 
+                            std::string city, std::string state, std::string zip) 
+{
+    this->firstname = first;
+    this->lastname = last;
+    this->address = address;
+    this->city = city;
+    this->state = state;
+    this->zipcode = zip;
+}
+
+//Copy Constructor
+CustomerInfo::CustomerInfo(const CustomerInfo &value) 
+{
+    this->firstname = value.firstname;
+    this->lastname = value.lastname;
+    this->address = value.address;
+    this->city = value.city;
+    this->state = value.state;
+    this->zipcode = value.zipcode;
+}
+
+//Destructor
+CustomerInfo::~CustomerInfo() 
+{
+    //std::cout << "Destructor Called\n";
+}
 
 //Overloaded Assignment
 CustomerInfo &CustomerInfo::operator=(CustomerInfo &unknown) {
