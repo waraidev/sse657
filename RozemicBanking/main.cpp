@@ -10,7 +10,7 @@
 #include <array>
 #include "Accounts/UserAccounts.cpp"
 #include "Accounts/BankAccount.cpp"
-#include "CustomerInfo.cpp"
+#include "Accounts/CustomerInfo.cpp"
 
 using namespace std;
 
