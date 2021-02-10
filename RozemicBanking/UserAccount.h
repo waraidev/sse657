@@ -8,7 +8,7 @@
 #include "CustomerInfo.h"
 
 /** A user account that has a balance that can be changed by deposits and withdrawals. */
-class UserAccount {
+class UserAccounts {
 
 private:
     double checkingBalance;
@@ -17,9 +17,9 @@ private:
     CustomerInfo customer;
 
 public:
-    UserAccount();
+    UserAccounts();
 
-    UserAccount(double initialBalance);
+    UserAccounts(double initialBalance);
 
     void deposit(double amount, bool isSavings);
 

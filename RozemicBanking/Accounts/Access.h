@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 /*
 #include <thread>
@@ -79,20 +80,45 @@ class CustomerInfo
         //friend std::ostream &operator<<(std::ostream out, CustomerInfo &info);
 };
 
+
+
+class BankAccount
+{
+    private:
+        double balance;
+
+    public:
+        BankAccount();
+
+        BankAccount(double initialBalance);
+
+        double getBalance();
+
+        void deposit(double amount);
+
+        void withdraw(double amount);
+
+        std::vector<std::string> getTransactions();
+
+        std::vector<std::string> addTransaction(std::string transaction);
+
+        std::vector<std::string> transactionList;        
+};
+
 /** A user account that has a balance that can be changed by deposits and withdrawals. */
-class UserAccount 
+class UserAccounts 
 {
 
 private:
-    double checkingBalance;
-    double savingsBalance;
+    BankAccount checking;
+    BankAccount savings;
 
     CustomerInfo customer;
 
 public:
-    UserAccount();
+    UserAccounts();
 
-    UserAccount(double initialBalance);
+    UserAccounts(double initialBalance);
 
     void deposit(double amount, bool isSavings);
 
@@ -100,17 +126,17 @@ public:
 
     void transfer(char sending, char receiving, double amount);
 
-    double getBalance(bool isSavings);
-
     CustomerInfo getCustomer();
 
     CustomerInfo setCustomer(CustomerInfo c);
 
-};
+    BankAccount getChecking();
 
-class Checking : public UserAccount 
-{
-    
+    BankAccount setChecking(BankAccount check);
+
+    BankAccount getSavings();
+
+    BankAccount setSavings(BankAccount save);
 
 };
 

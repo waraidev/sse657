@@ -8,7 +8,8 @@
 #include <iostream>
 #include <string>
 #include <array>
-#include "UserAccount.cpp"
+#include "Accounts/UserAccounts.cpp"
+#include "Accounts/BankAccount.cpp"
 #include "CustomerInfo.cpp"
 
 using namespace std;
@@ -92,14 +93,14 @@ int main(void) {
 
     cin >> initBalance;
 
-    UserAccount account(initBalance);
+    UserAccounts accounts(initBalance);
 
-    account.setCustomer(CustomerInfo(customer[0], customer[1], customer[2], customer[3], customer[4], customer[5]));
+    accounts.setCustomer(CustomerInfo(customer[0], customer[1], customer[2], customer[3], customer[4], customer[5]));
 
-    cout << account.getCustomer().printInfo() << endl;
+    cout << accounts.getCustomer().printInfo() << endl;
     //cout << account.getCustomer() << endl;
-    cout << "Your checking balance is $" << account.getBalance(false) << endl;
-    cout << "Your savings balance is $" << account.getBalance(true) << endl;
+    cout << "Your checking balance is $" << accounts.getChecking().getBalance() << endl;
+    cout << "Your savings balance is $" << accounts.getSavings().getBalance() << endl;
 
     //Account Services//
     char service;
@@ -124,7 +125,7 @@ int main(void) {
     case 'W':
         cout << "How much do you want to withdraw? ";
         cin >> amount;
-        account.withdraw(amount);
+        accounts.withdraw(amount);
         break;
     
     case 'D':
@@ -151,7 +152,7 @@ int main(void) {
                 break;
         }
 
-        account.deposit(amount, savings);
+        accounts.deposit(amount, savings);
         break;
     
     case 'T':   //Transferring money
@@ -166,7 +167,7 @@ int main(void) {
             if(verifyTransfer == 'Y' || verifyTransfer == 'y') {
                 cout << "How much do you want to transfer? ";
                 cin >> amount;
-                account.transfer('C', 'S', amount); //Transfer from Checking to Savings
+                accounts.transfer('C', 'S', amount); //Transfer from Checking to Savings
             } else {
                 cout << "No money was transferred." << endl;
             }
@@ -178,7 +179,7 @@ int main(void) {
             if(verifyTransfer == 'Y' || verifyTransfer == 'y') {
                 cout << "How much do you want to transfer? ";
                 cin >> amount;
-                account.transfer('S', 'C', amount); //Transfer from Savings to Checking
+                accounts.transfer('S', 'C', amount); //Transfer from Savings to Checking
             } else {
                 cout << "No money was transferred." << endl;
             }
