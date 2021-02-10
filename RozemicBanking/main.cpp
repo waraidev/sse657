@@ -22,7 +22,7 @@ for all users.
 
 
 array<string, 6> customerHome(string firstname = "N/A", string lastname = "N/A", string address = "N/A",
-             string city = "N/A", string state = "N/A", string zip = "N/A") {
+                              string city = "N/A", string state = "N/A", string zip = "N/A") {
     /*************************************************************
     This function will be used to input user information.
     Defaulting to N/A will allow searches for incomplete entries.
@@ -84,7 +84,7 @@ array<string, 6> customerHome(string firstname = "N/A", string lastname = "N/A",
 
 int main(void) {
     array<string, 6> customer;
-    double initBalance;    
+    double initBalance;
 
     //Setup customer account//
     customer = customerHome("John", "Doe");
@@ -120,78 +120,79 @@ int main(void) {
     cin >> service;
     cout << endl;
 
-    switch (toupper(service))
-    {   //Withdrawing and Depositing//
-    case 'W':
-        cout << "How much do you want to withdraw? ";
-        cin >> amount;
-        accounts.withdraw(amount);
-        break;
-    
-    case 'D':
-        cout << "Do you want to deposit to checking or savings?\n Choose C or S: ";
-        cin >> accountType;
-        cout << endl;
-        switch(toupper(accountType))
-        {
-            case 'C':
-                savings = false;
-                cout << "How much do you want to deposit? ";
-                cin >> amount;
-                break;
+    switch (toupper(service)) {   //Withdrawing and Depositing//
+        case 'W':
+            cout << "How much do you want to withdraw? ";
+            cin >> amount;
+            if (accounts.getChecking().getBalance() - amount < 0)
+                cout << "Error: insufficient funds. You only have $" << accounts.getChecking().getBalance() << " in your account." << endl;
+            else
+                accounts.withdraw(amount);
+            break;
 
-            case 'S':
-                savings = true;
-                cout << "How much do you want to deposit? ";
-                cin >> amount;
-                break;
-
-            default:
-                cout << "Incorrect choice!" << endl;
-                amount = 0;
-                break;
-        }
-
-        accounts.deposit(amount, savings);
-        break;
-    
-    case 'T':   //Transferring money
-        
-        cout << "From Account (Checking or Savings): ";
-        cin >> sending;
-        if(tolower(sending[0]) == 'c') {
-            cout << "\nTransfer Type: Checking --> Savings (Yes or No)" << endl;
-            cout << "Choose Y/N: ";
-            cin >> verifyTransfer;
+        case 'D':
+            cout << "Do you want to deposit to checking or savings?\n Choose C or S: ";
+            cin >> accountType;
             cout << endl;
-            if(verifyTransfer == 'Y' || verifyTransfer == 'y') {
-                cout << "How much do you want to transfer? ";
-                cin >> amount;
-                accounts.transfer('C', 'S', amount); //Transfer from Checking to Savings
-            } else {
-                cout << "No money was transferred." << endl;
-            }
-        } else if(tolower(sending[0]) == 's') {
-            cout << "\nTransfer Type: Savings --> Checking (Yes or No)" << endl;
-            cout << "Choose Y/N: ";
-            cin >> verifyTransfer;
-            cout << endl;
-            if(verifyTransfer == 'Y' || verifyTransfer == 'y') {
-                cout << "How much do you want to transfer? ";
-                cin >> amount;
-                accounts.transfer('S', 'C', amount); //Transfer from Savings to Checking
-            } else {
-                cout << "No money was transferred." << endl;
-            }
-        } else {
-            cout << "Error: Incorrect input. No money was transferred." << endl;
-        }
-        break;
-        
+            switch (toupper(accountType)) {
+                case 'C':
+                    savings = false;
+                    cout << "How much do you want to deposit? ";
+                    cin >> amount;
+                    break;
 
-    default:
-        cout << "Incorrect choice!" << endl;
-        break;
+                case 'S':
+                    savings = true;
+                    cout << "How much do you want to deposit? ";
+                    cin >> amount;
+                    break;
+
+                default:
+                    cout << "Incorrect choice!" << endl;
+                    amount = 0;
+                    break;
+            }
+
+            accounts.deposit(amount, savings);
+            break;
+
+        case 'T':   //Transferring money
+
+            cout << "From Account (Checking or Savings): ";
+            cin >> sending;
+            if (tolower(sending[0]) == 'c') {
+                cout << "\nTransfer Type: Checking --> Savings (Yes or No)" << endl;
+                cout << "Choose Y/N: ";
+                cin >> verifyTransfer;
+                cout << endl;
+                if (verifyTransfer == 'Y' || verifyTransfer == 'y') {
+                    cout << "How much do you want to transfer? ";
+                    cin >> amount;
+                    accounts.transfer('C', 'S', amount); //Transfer from Checking to Savings
+                } else {
+                    cout << "No money was transferred." << endl;
+                }
+            } else if (tolower(sending[0]) == 's') {
+                cout << "\nTransfer Type: Savings --> Checking (Yes or No)" << endl;
+                cout << "Choose Y/N: ";
+                cin >> verifyTransfer;
+                cout << endl;
+                if (verifyTransfer == 'Y' || verifyTransfer == 'y') {
+                    cout << "How much do you want to transfer? ";
+                    cin >> amount;
+                    accounts.transfer('S', 'C', amount); //Transfer from Savings to Checking
+                } else {
+                    cout << "No money was transferred." << endl;
+                }
+            } else {
+                cout << "Error: Incorrect input. No money was transferred." << endl;
+            }
+            break;
+
+
+        default:
+            cout << "Incorrect choice!" << endl;
+            break;
     }
 
     cout << endl;
