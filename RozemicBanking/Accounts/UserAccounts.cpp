@@ -43,7 +43,7 @@ CustomerInfo UserAccounts::setCustomer(CustomerInfo c) {
  * @param amount The amount to deposit.
  */
 void UserAccounts::deposit(double amount, bool isSavings) {
-    if(isSavings) {
+    if(isSavings && this->savings.checkLimit(amount)) {
         double currSavings = this->savings.getBalance();
         this->savings.deposit(amount);
         cout << "Your new savings balance is (";
@@ -52,7 +52,7 @@ void UserAccounts::deposit(double amount, bool isSavings) {
         cout << amount;
         cout << "): $";
         cout << this->savings.getBalance() << endl;
-    } else {
+    } else if(this->checking.checkLimit(amount)){
         double currChecking = this->checking.getBalance();;
         this->checking.deposit(amount);
         cout << "Your new checking balance is (";
@@ -61,6 +61,8 @@ void UserAccounts::deposit(double amount, bool isSavings) {
         cout << amount;
         cout << "): $";
         cout << this->checking.getBalance() << endl;
+    } else {
+        printLimitExceeded();
     }
 }
 
@@ -69,25 +71,33 @@ void UserAccounts::deposit(double amount, bool isSavings) {
  * @param amount The amount to withdraw.
  */
 void UserAccounts::withdraw(double amount) {
-    double current = this->checking.getBalance();
-    this->checking.withdraw(amount);
-    cout << "Your new checking balance is (";
-    cout << current;
-    cout << " - ";
-    cout << amount;
-    cout << "): $";
-    cout << this->checking.getBalance() << endl;
+    if(this->checking.checkLimit(amount)) {
+        double current = this->checking.getBalance();
+        this->checking.withdraw(amount);
+        cout << "Your new checking balance is (";
+        cout << current;
+        cout << " - ";
+        cout << amount;
+        cout << "): $";
+        cout << this->checking.getBalance() << endl;
+    } else {
+        printLimitExceeded();
+    }
 }
 
 void UserAccounts::transfer(char sending, char receiving, double amount) {
-    if(sending == 'C' && receiving == 'S') {
-        this->checking.withdraw(amount);
-        this->savings.deposit(amount);
-    } else if(sending == 'S' && receiving == 'C') {
-        this->savings.withdraw(amount);
-        this->checking.deposit(amount);
+    if(this->checking.checkLimit(amount) || this->savings.checkLimit(amount)) {
+        if(sending == 'C' && receiving == 'S') {
+            this->checking.withdraw(amount);
+            this->savings.deposit(amount);
+        } else if(sending == 'S' && receiving == 'C') {
+            this->savings.withdraw(amount);
+            this->checking.deposit(amount);
+        } else {
+            cout << "Error in input: No funds were transferred." << endl;
+        }
     } else {
-        cout << "Error in input: No funds were transferred." << endl;
+        printLimitExceeded();
     }
 
     cout << "Your checking balance is $" << this->checking.getBalance() << endl;
@@ -110,4 +120,9 @@ BankAccount UserAccounts::getSavings() {
 BankAccount UserAccounts::setSavings(BankAccount save) {
     this->savings = save;
     return save;
+}
+
+void UserAccounts::printLimitExceeded() {
+    cout << "Transaction Limit was exceeded with this purchase.";
+    cout << " Transaction will not be processed." << endl;
 }

@@ -87,6 +87,10 @@ class BankAccount
     private:
         double balance;
 
+        double transactionLimit;
+
+        double transactionTotal;
+
     public:
         BankAccount();
 
@@ -102,7 +106,13 @@ class BankAccount
 
         std::vector<std::string> addTransaction(std::string transaction);
 
-        std::vector<std::string> transactionList;        
+        std::vector<std::string> transactionList; 
+
+        void setTransactionLimit(double limit);     
+
+        bool checkLimit(double amount); 
+
+        void addToTransactionTotal(double amount); 
 };
 
 /** A user account that has a balance that can be changed by deposits and withdrawals. */
@@ -114,6 +124,8 @@ private:
     BankAccount savings;
 
     CustomerInfo customer;
+
+    void printLimitExceeded();
 
 public:
     UserAccounts();
@@ -137,7 +149,6 @@ public:
     BankAccount getSavings();
 
     BankAccount setSavings(BankAccount save);
-
 };
 
 #endif

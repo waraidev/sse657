@@ -4,10 +4,12 @@ using namespace std;
 
 BankAccount::BankAccount() {
     this->balance = 0;
+    this->transactionTotal = 0;
 }
 
 BankAccount::BankAccount(double initialBalance) {
     this->balance = initialBalance;
+    this->transactionTotal = 0;
 }
 
 /**
@@ -24,6 +26,7 @@ double BankAccount::getBalance() {
  */
 void BankAccount::deposit(double amount) {
     this->balance += amount;
+    addToTransactionTotal(amount);
 }
 
 /**
@@ -32,6 +35,7 @@ void BankAccount::deposit(double amount) {
  */
 void BankAccount::withdraw(double amount) {
     this->balance -= amount;
+    addToTransactionTotal(amount);
 }
 
 vector<string> BankAccount::getTransactions() {
@@ -42,4 +46,23 @@ vector<string> BankAccount::addTransaction(string transaction) {
     this->transactionList.push_back(transaction);
     
     return this->transactionList;
+}
+
+void BankAccount::setTransactionLimit(double limit) {
+    this->transactionLimit = limit;
+}
+
+/**
+ * Checks if daily transactions have exceeded transactionLimit
+ * @param amount The transaction amount.
+ */
+bool BankAccount::checkLimit(double amount) {
+    return (transactionTotal + amount) <= this->transactionLimit;
+}
+
+/**
+ * Adds money amount to transactionTotal
+ */
+void BankAccount::addToTransactionTotal(double amount) {
+    this->transactionTotal += amount;
 }
