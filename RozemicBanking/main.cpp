@@ -11,76 +11,9 @@
 #include "Accounts/UserAccounts.cpp"
 #include "Accounts/BankAccount.cpp"
 #include "Accounts/CustomerInfo.cpp"
+#include "HelperFunctions.cpp"
 
 using namespace std;
-
-
-/***************************************************************
-<array> was chosen due to the input requirements being the same
-for all users.
-****************************************************************/
-
-
-array<string, 6> customerHome(string firstname = "N/A", string lastname = "N/A", string address = "N/A",
-                              string city = "N/A", string state = "N/A", string zip = "N/A") {
-    /*************************************************************
-    This function will be used to input user information.
-    Defaulting to N/A will allow searches for incomplete entries.
-    **************************************************************/
-    string input1;
-    if (firstname == "N/A") {
-        cout << "Enter First Name:\n";
-        cin >> input1;
-        firstname = input1;
-        cout << endl;
-    }
-
-
-    if (lastname == "N/A") {
-        cout << "Enter Last Name:\n";
-        cin >> input1;
-        lastname = input1;
-        cout << endl;
-    }
-
-    if (address == "N/A") {
-        cout << "Enter Address: (Hit ENTER twice!)" << endl;
-        /***************************************************
-        Use getline to allow input that will be more than a
-        word long.
-        ****************************************************/
-        getline(cin, input1);
-        cin.ignore();
-        address = input1;
-        cout << endl;
-    }
-
-    if (city == "N/A") {
-        cout << "Enter City:\n";
-        cin >> input1;
-        city = input1;
-        cout << endl;
-    }
-
-    if (state == "N/A") {
-        cout << "Enter State:\n";
-        cin >> input1;
-        state = input1;
-        cout << endl;
-    }
-
-    if (zip == "N/A") {
-        cout << "Enter Zip Code:\n";
-        cin >> input1;
-        zip = input1;
-        cout << endl;
-    }
-
-    array<string, 6> newcustomer = {firstname, lastname, address, city, state, zip};
-
-    return newcustomer;
-
-}
 
 int main(void) {
     array<string, 6> customer;
@@ -99,8 +32,8 @@ int main(void) {
     accounts.setCustomer(CustomerInfo(customer[0], customer[1], customer[2], customer[3], customer[4], customer[5]));
 
     cout << accounts.getCustomer().printInfo() << endl;
-    cout << "Your checking balance is $" << accounts.getChecking().getBalance() << endl;
-    cout << "Your savings balance is $" << accounts.getSavings().getBalance() << endl;
+    cout << "Your checking balance is $" << checkingBalance(accounts) << endl;
+    cout << "Your savings balance is $" << savingsBalance(accounts) << endl;
 
     cout << "What would you like your daily transaction limit for checking and savings to be? ";
     cin >> limit;
@@ -132,8 +65,8 @@ int main(void) {
             case 'W':
                 cout << "How much do you want to withdraw? ";
                 cin >> amount;
-                if (accounts.getChecking().getBalance() - amount < 0)
-                    cout << "Error: insufficient funds. You only have $" << accounts.getChecking().getBalance() << " in your account." << endl;
+                if (checkingBalance(accounts) - amount < 0)
+                    cout << "Error: insufficient funds. You only have $" << checkingBalance(accounts) << " in your account." << endl;
                 else
                     accounts.withdraw(amount);
                 break;
