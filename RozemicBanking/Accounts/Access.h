@@ -135,7 +135,7 @@ private:
     void printLimitExceeded();
 
 public:
-    static UserAccounts* getInstance();
+    static UserAccounts* createAccount();
 
     void deposit(double amount, bool isSavings);
 

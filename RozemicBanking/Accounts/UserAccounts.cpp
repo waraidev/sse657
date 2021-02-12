@@ -8,7 +8,13 @@ using namespace std;
 
 UserAccounts* UserAccounts::instance = 0;
 
-UserAccounts* UserAccounts::getInstance() {
+/**
+ * Creates a persisting instance of UserAccounts
+ * with the Singleton design pattern. This allows
+ * the checking and savings accounts to be non-static,
+ * yet persistent throughout code run.
+ */ 
+UserAccounts* UserAccounts::createAccount() {
     if(!instance) {
         instance = new UserAccounts();
     }

@@ -27,7 +27,7 @@ int main(void) {
 
     cin >> initBalance;
 
-    UserAccounts *accounts = accounts->getInstance();
+    UserAccounts *accounts = accounts->createAccount();
 
     initAccounts(accounts, initBalance);
 
