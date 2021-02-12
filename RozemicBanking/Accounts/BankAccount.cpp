@@ -2,6 +2,8 @@
 
 using namespace std;
 
+double BankAccount::transactionLimit = 0;
+
 BankAccount::BankAccount() {
     this->balance = 0;
     this->transactionTotal = 0;
@@ -49,7 +51,7 @@ vector<string> BankAccount::addTransaction(string transaction) {
 }
 
 void BankAccount::setTransactionLimit(double limit) {
-    this->transactionLimit = limit;
+    transactionLimit = limit;
 }
 
 /**

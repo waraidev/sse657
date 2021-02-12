@@ -87,7 +87,7 @@ class BankAccount
     private:
         double balance;
 
-        double transactionLimit;
+        static double transactionLimit;
 
         double transactionTotal;
 
@@ -122,15 +122,20 @@ class UserAccounts
 private:
     BankAccount checking;
     BankAccount savings;
-
     CustomerInfo customer;
+    
+    static UserAccounts *instance;
+
+    /** Constructs a user account with a balance of zero. */
+    UserAccounts() {
+        checking = 0;
+        savings = 0;
+    }
 
     void printLimitExceeded();
 
 public:
-    UserAccounts();
-
-    UserAccounts(double initialBalance);
+    static UserAccounts* getInstance();
 
     void deposit(double amount, bool isSavings);
 
@@ -140,15 +145,15 @@ public:
 
     CustomerInfo getCustomer();
 
-    CustomerInfo setCustomer(CustomerInfo c);
+    void setCustomer(CustomerInfo c);
 
     BankAccount getChecking();
 
-    BankAccount setChecking(BankAccount check);
+    void setChecking(BankAccount check);
 
     BankAccount getSavings();
 
-    BankAccount setSavings(BankAccount save);
+    void setSavings(BankAccount save);
 };
 
 #endif
