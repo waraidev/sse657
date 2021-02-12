@@ -27,18 +27,20 @@ int main(void) {
 
     cin >> initBalance;
 
-    UserAccounts accounts(initBalance);
+    UserAccounts *accounts = accounts->getInstance();
 
-    accounts.setCustomer(CustomerInfo(customer[0], customer[1], customer[2], customer[3], customer[4], customer[5]));
+    initAccounts(accounts, initBalance);
 
-    cout << accounts.getCustomer().printInfo() << endl;
+    accounts->setCustomer(CustomerInfo(customer[0], customer[1], customer[2], customer[3], customer[4], customer[5]));
+
+    cout << accounts->getCustomer().printInfo() << endl;
     cout << "Your checking balance is $" << checkingBalance(accounts) << endl;
     cout << "Your savings balance is $" << savingsBalance(accounts) << endl;
 
     cout << "What would you like your daily transaction limit for checking and savings to be? ";
     cin >> limit;
-    accounts.getChecking().setTransactionLimit(limit);
-    accounts.getSavings().setTransactionLimit(limit);
+    accounts->getChecking().setTransactionLimit(limit);
+    accounts->getSavings().setTransactionLimit(limit);
 
     cout << "Your daily limit is $" << limit << endl;
 
@@ -68,7 +70,7 @@ int main(void) {
                 if (checkingBalance(accounts) - amount < 0)
                     cout << "Error: insufficient funds. You only have $" << checkingBalance(accounts) << " in your account." << endl;
                 else
-                    accounts.withdraw(amount);
+                    accounts->withdraw(amount);
                 break;
 
             case 'D':
@@ -94,7 +96,7 @@ int main(void) {
                         break;
                 }
 
-                accounts.deposit(amount, savings);
+                accounts->deposit(amount, savings);
                 break;
 
             case 'T':   //Transferring money
@@ -109,7 +111,7 @@ int main(void) {
                     if (verifyTransfer == 'Y' || verifyTransfer == 'y') {
                         cout << "How much do you want to transfer? ";
                         cin >> amount;
-                        accounts.transfer('C', 'S', amount); //Transfer from Checking to Savings
+                        accounts->transfer('C', 'S', amount); //Transfer from Checking to Savings
                     } else {
                         cout << "No money was transferred." << endl;
                     }
@@ -121,7 +123,7 @@ int main(void) {
                     if (verifyTransfer == 'Y' || verifyTransfer == 'y') {
                         cout << "How much do you want to transfer? ";
                         cin >> amount;
-                        accounts.transfer('S', 'C', amount); //Transfer from Savings to Checking
+                        accounts->transfer('S', 'C', amount); //Transfer from Savings to Checking
                     } else {
                         cout << "No money was transferred." << endl;
                     }
@@ -130,14 +132,14 @@ int main(void) {
                 }
                 break;
 
+            case 'E':
+                break;
 
             default:
                 cout << "Incorrect choice!" << endl;
                 break;
         }
     }
-
-    cout << endl;
 
     //Finishing Bank Use//
     cout << "Thank you for choosing Rozemic Banking! Have a great day!" << endl;

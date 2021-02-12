@@ -6,8 +6,10 @@ using namespace std;
 
 //Declarations
 
-double savingsBalance(UserAccounts accounts);
-double checkingBalance(UserAccounts accounts);
+double savingsBalance(UserAccounts *accounts);
+double checkingBalance(UserAccounts *accounts);
+
+void initAccounts(UserAccounts *accounts, double initBalance);
 
 /***************************************************************
 <array> was chosen due to the input requirements being the same
@@ -84,18 +86,26 @@ array<string, 6> customerHome(string firstname, string lastname, string address,
 
 }
 
+void initAccounts(UserAccounts *accounts, double initBalance) {
+    BankAccount check = BankAccount(initBalance);
+    BankAccount save = BankAccount();
+
+    accounts->setChecking(check);
+    accounts->setSavings(save);
+}
+
 /**
  * Gets the balance of the user's savings account
  * @returns double
  */
-double savingsBalance(UserAccounts accounts) {
-    return accounts.getSavings().getBalance();
+double savingsBalance(UserAccounts *accounts) {
+    return accounts->getSavings().getBalance();
 }
 
 /**
  * Gets the balance of the user's checking account
  * @returns double
  */
-double checkingBalance(UserAccounts accounts) {
-    return accounts.getChecking().getBalance();
+double checkingBalance(UserAccounts *accounts) {
+    return accounts->getChecking().getBalance();
 }

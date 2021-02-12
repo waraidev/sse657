@@ -6,19 +6,14 @@
 
 using namespace std;
 
-/** Constructs a user account with a balance of zero. */
-UserAccounts::UserAccounts() {
-    this->checking = BankAccount();
-    this->savings = BankAccount();
-}
+UserAccounts* UserAccounts::instance = 0;
 
-/**
- * Constructs a user account with a given balance.
- * @param initialBalance The initial balance.
- */
-UserAccounts::UserAccounts(double initialBalance) {
-    this->checking = BankAccount(initialBalance);
-    this->savings = BankAccount();
+UserAccounts* UserAccounts::getInstance() {
+    if(!instance) {
+        instance = new UserAccounts();
+    }
+
+    return instance;
 }
 
 /**
@@ -33,9 +28,8 @@ CustomerInfo UserAccounts::getCustomer() {
  * Gets the CustomerInfo object associated
  * with the UserAccount
  */
-CustomerInfo UserAccounts::setCustomer(CustomerInfo c) {
+void UserAccounts::setCustomer(CustomerInfo c) {
     this->customer = c;
-    return c;
 }
 
 /**
@@ -108,18 +102,16 @@ BankAccount UserAccounts::getChecking() {
     return this->checking;
 }
 
-BankAccount UserAccounts::setChecking(BankAccount check) {
+void UserAccounts::setChecking(BankAccount check) {
     this->checking = check;
-    return check;
 }
 
 BankAccount UserAccounts::getSavings() {
     return this->savings;
 }
 
-BankAccount UserAccounts::setSavings(BankAccount save) {
+void UserAccounts::setSavings(BankAccount save) {
     this->savings = save;
-    return save;
 }
 
 void UserAccounts::printLimitExceeded() {
