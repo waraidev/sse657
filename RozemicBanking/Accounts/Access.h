@@ -1,8 +1,9 @@
-#ifndef CUSTOMER_INPUT
-#define CUSTOMER_INPUT
+#ifndef ACCESS
+#define ACCESS
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 /*
 #include <thread>
@@ -79,33 +80,80 @@ class CustomerInfo
         //friend std::ostream &operator<<(std::ostream out, CustomerInfo &info);
 };
 
-//Constructor
-CustomerInfo::CustomerInfo(std::string first, std::string last, std::string address, 
-                            std::string city, std::string state, std::string zip) 
-{
-    this->firstname = first;
-    this->lastname = last;
-    this->address = address;
-    this->city = city;
-    this->state = state;
-    this->zipcode = zip;
-}
 
-//Copy Constructor
-CustomerInfo::CustomerInfo(const CustomerInfo &value) 
-{
-    this->firstname = value.firstname;
-    this->lastname = value.lastname;
-    this->address = value.address;
-    this->city = value.city;
-    this->state = value.state;
-    this->zipcode = value.zipcode;
-}
 
-//Destructor
-CustomerInfo::~CustomerInfo() 
+class BankAccount
 {
-    //std::cout << "Destructor Called\n";
-}
+    private:
+        double balance;
+
+        static double transactionLimit;
+
+        double transactionTotal;
+
+    public:
+        BankAccount();
+
+        BankAccount(double initialBalance);
+
+        double getBalance();
+
+        void deposit(double amount);
+
+        void withdraw(double amount);
+
+        std::vector<std::string> getTransactions();
+
+        std::vector<std::string> addTransaction(std::string transaction);
+
+        std::vector<std::string> transactionList; 
+
+        void setTransactionLimit(double limit);     
+
+        bool checkLimit(double amount); 
+
+        void addToTransactionTotal(double amount); 
+};
+
+/** A user account that has a balance that can be changed by deposits and withdrawals. */
+class UserAccounts 
+{
+
+private:
+    BankAccount checking;
+    BankAccount savings;
+    CustomerInfo customer;
+    
+    static UserAccounts *instance;
+
+    /** Constructs a user account with a balance of zero. */
+    UserAccounts() {
+        checking = 0;
+        savings = 0;
+    }
+
+    void printLimitExceeded();
+
+public:
+    static UserAccounts* createAccount();
+
+    void deposit(double amount, bool isSavings);
+
+    void withdraw(double amount);
+
+    void transfer(char sending, char receiving, double amount);
+
+    CustomerInfo getCustomer();
+
+    void setCustomer(CustomerInfo c);
+
+    BankAccount getChecking();
+
+    void setChecking(BankAccount check);
+
+    BankAccount getSavings();
+
+    void setSavings(BankAccount save);
+};
 
 #endif
