@@ -52,7 +52,7 @@ void UserAccounts::deposit(double amount, bool isSavings) {
         cout << amount;
         cout << "): $";
         cout << this->savings.getBalance() << endl;
-    } else if(this->checking.checkLimit(amount)){
+    } else if(!isSavings && this->checking.checkLimit(amount)){
         double currChecking = this->checking.getBalance();;
         this->checking.deposit(amount);
         cout << "Your new checking balance is (";
@@ -86,7 +86,7 @@ void UserAccounts::withdraw(double amount) {
 }
 
 void UserAccounts::transfer(char sending, char receiving, double amount) {
-    if(this->checking.checkLimit(amount) || this->savings.checkLimit(amount)) {
+    if(this->checking.checkLimit(amount) && this->savings.checkLimit(amount)) {
         if(sending == 'C' && receiving == 'S') {
             this->checking.withdraw(amount);
             this->savings.deposit(amount);

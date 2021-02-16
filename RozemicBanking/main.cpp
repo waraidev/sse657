@@ -103,24 +103,24 @@ int main(void) {
 
                 cout << "From Account (Checking or Savings): ";
                 cin >> sending;
-                if (tolower(sending[0]) == 'c') {
+                if (toupper(sending[0]) == 'C') {
                     cout << "\nTransfer Type: Checking --> Savings (Yes or No)" << endl;
                     cout << "Choose Y/N: ";
                     cin >> verifyTransfer;
                     cout << endl;
-                    if (verifyTransfer == 'Y' || verifyTransfer == 'y') {
+                    if (toupper(verifyTransfer) == 'Y') {
                         cout << "How much do you want to transfer? ";
                         cin >> amount;
                         accounts->transfer('C', 'S', amount); //Transfer from Checking to Savings
                     } else {
                         cout << "No money was transferred." << endl;
                     }
-                } else if (tolower(sending[0]) == 's') {
+                } else if (toupper(sending[0]) == 'S') {
                     cout << "\nTransfer Type: Savings --> Checking (Yes or No)" << endl;
                     cout << "Choose Y/N: ";
                     cin >> verifyTransfer;
                     cout << endl;
-                    if (verifyTransfer == 'Y' || verifyTransfer == 'y') {
+                    if (toupper(verifyTransfer) == 'Y') {
                         cout << "How much do you want to transfer? ";
                         cin >> amount;
                         accounts->transfer('S', 'C', amount); //Transfer from Savings to Checking

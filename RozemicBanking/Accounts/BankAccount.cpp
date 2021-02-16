@@ -50,6 +50,10 @@ vector<string> BankAccount::addTransaction(string transaction) {
     return this->transactionList;
 }
 
+/**
+ * Sets the limit of daily transactions
+ * @param limit The limit amount.
+ */
 void BankAccount::setTransactionLimit(double limit) {
     transactionLimit = limit;
 }
