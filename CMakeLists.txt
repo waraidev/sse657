@@ -8,3 +8,4 @@ add_executable(sse657
         RozemicBanking/Payment.cpp 
         RozemicBanking/Payment.h
         )
+add_subdirectory(Google_tests)

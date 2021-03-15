@@ -118,6 +118,7 @@ class BankAccount
 /** A user account that has a balance that can be changed by deposits and withdrawals. */
 class UserAccounts 
 {
+    friend class BankAccountFixture;
 
 private:
     BankAccount checking;
