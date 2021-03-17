@@ -2,8 +2,12 @@
 #define ACCESS
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
+#include "../External/json.hpp"
+
+using json = nlohmann::json;
 
 /*
 #include <thread>
@@ -155,6 +159,10 @@ public:
     BankAccount getSavings();
 
     void setSavings(BankAccount save);
+
+    json getJson();
+
+    void setJson(json obj);
 };
 
 #endif

@@ -5,6 +5,7 @@
 #include "Access.h"
 
 using namespace std;
+using json = nlohmann::json;
 
 UserAccounts* UserAccounts::instance = 0;
 
@@ -123,4 +124,50 @@ void UserAccounts::setSavings(BankAccount save) {
 void UserAccounts::printLimitExceeded() {
     cout << "Transaction Limit was exceeded with this purchase.";
     cout << " Transaction will not be processed." << endl;
+}
+
+json UserAccounts::getJson() {
+    fstream file;
+    json j;
+    file.open("../json/accounts.json");
+    if(file) {
+        file >> j;
+    } else {
+        j = {
+            { "Accounts", {
+                { "Checking", {
+                    { "Balance", "" },
+                    { "TransactionTotal", "" },
+                    { "TransactionLimit", "" },
+                    { "Transactions", {
+                        {}
+                    }}
+                }},
+                { "Savings", {
+                    { "Balance", "" },
+                    { "TransactionTotal", "" },
+                    { "TransactionLimit", "" },
+                    { "Transactions", {
+                        {}
+                    }}
+                }},
+                { "CustomerInfo", {
+                    { "FirstName", "" },
+                    { "LastName", "" },
+                    { "Address", "" },
+                    { "City", "" },
+                    { "State", "" },
+                    { "ZipCode", ""}
+                }}
+            }}
+        };
+
+        file << j;
+    }
+
+    return j;
+}
+
+void UserAccounts::setJson(json obj) {
+
 }
