@@ -45,22 +45,32 @@ TEST_F(BankAccountFixture, TransactionLimitTest) {
 
 TEST_F(BankAccountFixture, WithdrawTest) {
     userAccount->withdraw(49);
-    EXPECT_EQ(userAccount->getChecking().getBalance(), 41);
+    EXPECT_EQ(checkingBalance(userAccount), 41);
 
     // Transaction limit exceeded; no money gets withdrawn
     userAccount->withdraw(2);
-    EXPECT_EQ(userAccount->getChecking().getBalance(), 41);
+    EXPECT_EQ(checkingBalance(userAccount), 41);
 }
 
 TEST_F(BankAccountFixture, TransferTest) {
     // Transfer from checking to savings
     userAccount->transfer('C', 'S', 40);
-    EXPECT_EQ(userAccount->getChecking().getBalance(), 50);
-    EXPECT_EQ(userAccount->getSavings().getBalance(), 40);
+    EXPECT_EQ(checkingBalance(userAccount), 50);
+    EXPECT_EQ(savingsBalance(userAccount), 40);
+
+    // Transaction limit exceeded; no money gets transferred
+    userAccount->transfer('S', 'C', 20);
+    EXPECT_EQ(checkingBalance(userAccount), 50);
+    EXPECT_EQ(savingsBalance(userAccount), 40);
+
+    // Error message since you can't transfer to the same account; no money gets transferred
+    userAccount->transfer('S', 'S', 5);
+    EXPECT_EQ(checkingBalance(userAccount), 50);
+    EXPECT_EQ(savingsBalance(userAccount), 40);
 
     // Transfer from savings to checking
     userAccount->transfer('S', 'C', 10);
-    EXPECT_EQ(userAccount->getChecking().getBalance(), 60);
-    EXPECT_EQ(userAccount->getSavings().getBalance(), 30);
+    EXPECT_EQ(checkingBalance(userAccount), 60);
+    EXPECT_EQ(savingsBalance(userAccount), 30);
 }
 
