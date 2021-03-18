@@ -121,9 +121,44 @@ void UserAccounts::setSavings(BankAccount save) {
     this->savings = save;
 }
 
+//private
 void UserAccounts::printLimitExceeded() {
     cout << "Transaction Limit was exceeded with this purchase.";
     cout << " Transaction will not be processed." << endl;
+}
+
+//private
+json UserAccounts::setDefaultJson() {
+    json j = {
+        { "Accounts", {
+            { "Checking", {
+                { "Balance", "" },
+                { "TransactionTotal", "" },
+                { "TransactionLimit", "" },
+                { "Transactions", {
+                    {}
+                }}
+            }},
+            { "Savings", {
+                { "Balance", "" },
+                { "TransactionTotal", "" },
+                { "TransactionLimit", "" },
+                { "Transactions", {
+                    {}
+                }}
+            }},
+            { "CustomerInfo", {
+                { "FirstName", "" },
+                { "LastName", "" },
+                { "Address", "" },
+                { "City", "" },
+                { "State", "" },
+                { "ZipCode", ""}
+            }}
+        }}
+    };
+
+    return j;
 }
 
 json UserAccounts::getJson() {
@@ -133,41 +168,17 @@ json UserAccounts::getJson() {
     if(file) {
         file >> j;
     } else {
-        j = {
-            { "Accounts", {
-                { "Checking", {
-                    { "Balance", "" },
-                    { "TransactionTotal", "" },
-                    { "TransactionLimit", "" },
-                    { "Transactions", {
-                        {}
-                    }}
-                }},
-                { "Savings", {
-                    { "Balance", "" },
-                    { "TransactionTotal", "" },
-                    { "TransactionLimit", "" },
-                    { "Transactions", {
-                        {}
-                    }}
-                }},
-                { "CustomerInfo", {
-                    { "FirstName", "" },
-                    { "LastName", "" },
-                    { "Address", "" },
-                    { "City", "" },
-                    { "State", "" },
-                    { "ZipCode", ""}
-                }}
-            }}
-        };
-
+        j = setDefaultJson();
         file << j;
     }
 
+    file.close();
     return j;
 }
 
 void UserAccounts::setJson(json obj) {
-
+    fstream file;
+    file.open("../json/accounts.json", ios::out | ios::trunc);
+    file << obj;
+    file.close();
 }

@@ -21,7 +21,7 @@ int main(void) {
     double limit;
 
     //Setup customer account//
-    customer = customerHome("John", "Doe");
+    customer = customerHome();
 
     cout << "What is your initial balance?" << endl;
 

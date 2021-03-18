@@ -3,11 +3,9 @@
 
 #include <iostream>
 #include <fstream>
-#include <string>
-#include <vector>
-#include "../External/json.hpp"
 
-using json = nlohmann::json;
+// #include <vector> and <string> from json.hpp
+#include "../External/json.hpp"
 
 /*
 #include <thread>
@@ -138,6 +136,7 @@ private:
     }
 
     void printLimitExceeded();
+    nlohmann::json setDefaultJson();
 
 public:
     static UserAccounts* createAccount();
@@ -160,9 +159,9 @@ public:
 
     void setSavings(BankAccount save);
 
-    json getJson();
+    nlohmann::json getJson();
 
-    void setJson(json obj);
+    void setJson(nlohmann::json obj);
 };
 
 #endif
