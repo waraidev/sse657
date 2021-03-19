@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <fstream>
+#include <ctime>
+#include <cstdlib>
 
 // #include <vector> and <string> from json.hpp
 #include "../External/json.hpp"
@@ -106,7 +108,7 @@ class BankAccount
 
         std::vector<std::string> getTransactions();
 
-        std::vector<std::string> addTransaction(std::string transaction);
+        void addTransaction(std::string transaction);
 
         std::vector<std::string> transactionList; 
 

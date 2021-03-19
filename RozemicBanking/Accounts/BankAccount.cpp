@@ -28,6 +28,11 @@ double BankAccount::getBalance() {
  */
 void BankAccount::deposit(double amount) {
     this->balance += amount;
+
+    time_t now = time(0);
+    char* dt = ctime(&now);
+
+    addTransaction("Deposited $" + to_string(amount) + " at " + dt);
     addToTransactionTotal(amount);
 }
 
@@ -37,6 +42,11 @@ void BankAccount::deposit(double amount) {
  */
 void BankAccount::withdraw(double amount) {
     this->balance -= amount;
+
+    time_t now = time(0);
+    char* dt = ctime(&now);
+
+    addTransaction("Withdrew $" + to_string(amount) + " at " + dt);
     addToTransactionTotal(amount);
 }
 
@@ -44,10 +54,8 @@ vector<string> BankAccount::getTransactions() {
     return this->transactionList;
 }
 
-vector<string> BankAccount::addTransaction(string transaction) {
+void BankAccount::addTransaction(string transaction) {
     this->transactionList.push_back(transaction);
-    
-    return this->transactionList;
 }
 
 /**

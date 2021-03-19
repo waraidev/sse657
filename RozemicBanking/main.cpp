@@ -19,30 +19,26 @@ int main(void) {
     array<string, 6> customer;
     double initBalance;
     double limit;
+    char hasAccount;
 
-    //Setup customer account//
-    customer = customerHome();
+    UserAccounts *accounts;
 
-    cout << "What is your initial balance?" << endl;
+    cout << "Do you already have an account with Rozemic Banking? (Y/N)" << endl;
 
-    cin >> initBalance;
+    cin >> hasAccount;
+    cout << endl;
 
-    UserAccounts *accounts = accounts->createAccount();
+    switch(toupper(hasAccount)) {
+        case 'Y':
+            break;
 
-    initAccounts(accounts, initBalance);
-
-    accounts->setCustomer(CustomerInfo(customer[0], customer[1], customer[2], customer[3], customer[4], customer[5]));
-
-    cout << accounts->getCustomer().printInfo() << endl;
-    cout << "Your checking balance is $" << checkingBalance(accounts) << endl;
-    cout << "Your savings balance is $" << savingsBalance(accounts) << endl;
-
-    cout << "What would you like your daily transaction limit for checking and savings to be? ";
-    cin >> limit;
-    accounts->getChecking().setTransactionLimit(limit);
-    accounts->getSavings().setTransactionLimit(limit);
-
-    cout << "Your daily limit is $" << limit << endl;
+        case 'N':
+            accounts = getAccount(false);
+            break;
+        
+        default:
+            break;
+    }
 
     //Account Services//
     char service;

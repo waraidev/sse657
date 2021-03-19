@@ -4,8 +4,8 @@
 
 #include "Access.h"
 
-using namespace std;
 using json = nlohmann::json;
+using namespace std;
 
 UserAccounts* UserAccounts::instance = 0;
 
@@ -147,15 +147,16 @@ json UserAccounts::setDefaultJson() {
                     {}
                 }}
             }},
-            { "CustomerInfo", {
-                { "FirstName", "" },
-                { "LastName", "" },
-                { "Address", "" },
-                { "City", "" },
-                { "State", "" },
-                { "ZipCode", ""}
-            }}
-        }}
+        }},
+        { "CustomerInfo", {
+            { "FirstName", "" },
+            { "LastName", "" },
+            { "Address", "" },
+            { "City", "" },
+            { "State", "" },
+            { "ZipCode", ""}
+        }},
+        { "ID", }
     };
 
     return j;
