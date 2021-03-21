@@ -1,6 +1,15 @@
 #include "Access.h"
+#include <sstream>
 
 using namespace std;
+
+namespace stdplus {
+    std::string to_string(double d) {
+        ostringstream s;
+        s << setprecision(numeric_limits<double>::digits10) << d;
+        return s.str();
+    }
+}
 
 double BankAccount::transactionLimit = 0;
 
@@ -22,6 +31,10 @@ double BankAccount::getBalance() {
     return this->balance;
 }
 
+double BankAccount::getTransactionTotal() {
+    return this->transactionTotal;
+}
+
 /**
  * Deposits money into the user's account.
  * @param amount The amount to deposit.
@@ -32,7 +45,7 @@ void BankAccount::deposit(double amount) {
     time_t now = time(0);
     char* dt = ctime(&now);
 
-    addTransaction("Deposited $" + to_string(amount) + " at " + dt);
+    addTransaction("Deposited $" + stdplus::to_string(amount) + " at " + dt);
     addToTransactionTotal(amount);
 }
 
@@ -46,7 +59,9 @@ void BankAccount::withdraw(double amount) {
     time_t now = time(0);
     char* dt = ctime(&now);
 
-    addTransaction("Withdrew $" + to_string(amount) + " at " + dt);
+
+
+    addTransaction("Withdrew $" + stdplus::to_string(amount) + " at " + dt);
     addToTransactionTotal(amount);
 }
 
@@ -56,6 +71,10 @@ vector<string> BankAccount::getTransactions() {
 
 void BankAccount::addTransaction(string transaction) {
     this->transactionList.push_back(transaction);
+}
+
+double BankAccount::getTransactionLimit() {
+    return this->transactionLimit;
 }
 
 /**

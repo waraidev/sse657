@@ -3,6 +3,7 @@
 //
 
 #include "Access.h"
+#include <uuid/uuid.h>
 
 using json = nlohmann::json;
 using namespace std;
@@ -127,41 +128,6 @@ void UserAccounts::printLimitExceeded() {
     cout << " Transaction will not be processed." << endl;
 }
 
-//private
-json UserAccounts::setDefaultJson() {
-    json j = {
-        { "Accounts", {
-            { "Checking", {
-                { "Balance", "" },
-                { "TransactionTotal", "" },
-                { "TransactionLimit", "" },
-                { "Transactions", {
-                    {}
-                }}
-            }},
-            { "Savings", {
-                { "Balance", "" },
-                { "TransactionTotal", "" },
-                { "TransactionLimit", "" },
-                { "Transactions", {
-                    {}
-                }}
-            }},
-        }},
-        { "CustomerInfo", {
-            { "FirstName", "" },
-            { "LastName", "" },
-            { "Address", "" },
-            { "City", "" },
-            { "State", "" },
-            { "ZipCode", ""}
-        }},
-        { "ID", }
-    };
-
-    return j;
-}
-
 json UserAccounts::getJson() {
     fstream file;
     json j;
@@ -169,17 +135,65 @@ json UserAccounts::getJson() {
     if(file) {
         file >> j;
     } else {
-        j = setDefaultJson();
-        file << j;
+        cout << "No file found. Empty JSON file will be output." << endl;
     }
 
     file.close();
     return j;
 }
 
+json UserAccounts::setJson(
+    double c_balance, double c_total, 
+    double c_limit, std::vector<std::string> c_transactions,
+    double s_balance, double s_total,
+    double s_limit, std::vector<std::string> s_transactions,
+    std::string firstname, std::string lastname,
+    std::string address, std::string city,
+    std::string state, std::string zipcode) 
+    {
+
+    uuid_t id;
+    uuid_generate_random(id);
+
+    json j = {
+        { "Accounts", {
+            { "Checking", {
+                { "Balance", c_balance },
+                { "TransactionTotal", c_total },
+                { "TransactionLimit", c_limit },
+                { "Transactions", c_transactions }
+            }},
+            { "Savings", {
+                { "Balance", s_balance },
+                { "TransactionTotal", s_total },
+                { "TransactionLimit", s_limit },
+                { "Transactions", s_transactions }
+            }},
+        }},
+        { "CustomerInfo", {
+            { "FirstName", firstname },
+            { "LastName", lastname },
+            { "Address", address },
+            { "City", city },
+            { "State", state },
+            { "ZipCode", zipcode }
+        }},
+        { "ID", id}
+    };
+
+    fstream file("RozemicBanking/json/accounts.json", 
+        fstream::in | fstream::out | fstream::app);
+    if(file) {
+        file << setw(4) << j;
+    }
+    file.close();
+
+    return j;
+}
+
 void UserAccounts::setJson(json obj) {
     fstream file;
-    file.open("../json/accounts.json", ios::out | ios::trunc);
+    file.open("../json/accounts.json", fstream::out | fstream::trunc);
     file << obj;
     file.close();
 }

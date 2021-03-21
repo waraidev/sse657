@@ -40,16 +40,15 @@
 class CustomerInfo 
 {
     private:
+
+    public:
         std::string firstname;
         std::string lastname;
         std::string address;
         std::string city;
         std::string state;
         std::string zipcode;
-
-    protected:
-
-    public:
+        
         //Constructor
         CustomerInfo(std::string firstname = "N/A",
                         std::string lastname = "N/A",
@@ -102,6 +101,8 @@ class BankAccount
 
         double getBalance();
 
+        double getTransactionTotal();
+
         void deposit(double amount);
 
         void withdraw(double amount);
@@ -110,7 +111,9 @@ class BankAccount
 
         void addTransaction(std::string transaction);
 
-        std::vector<std::string> transactionList; 
+        std::vector<std::string> transactionList;
+
+        double getTransactionLimit(); 
 
         void setTransactionLimit(double limit);     
 
@@ -138,7 +141,6 @@ private:
     }
 
     void printLimitExceeded();
-    nlohmann::json setDefaultJson();
 
 public:
     static UserAccounts* createAccount();
@@ -162,6 +164,15 @@ public:
     void setSavings(BankAccount save);
 
     nlohmann::json getJson();
+
+    nlohmann::json setJson(
+        double c_balance, double c_total, 
+        double c_limit, std::vector<std::string> c_transactions,
+        double s_balance, double s_total,
+        double s_limit, std::vector<std::string> s_transactions,
+        std::string firstname, std::string lastname,
+        std::string address, std::string city,
+        std::string state, std::string zipcode);
 
     void setJson(nlohmann::json obj);
 };
