@@ -1,0 +1,31 @@
+{
+    "11979845503651388038": {
+        "Accounts": {
+            "Checking": {
+                "Balance": 4500.0,
+                "TransactionLimit": 800.0,
+                "TransactionTotal": 500.0,
+                "Transactions": [
+                    "Withdrew $500 at Mon Mar 22 09:34:30 2021\n"
+                ]
+            },
+            "Savings": {
+                "Balance": 500.0,
+                "TransactionLimit": 800.0,
+                "TransactionTotal": 500.0,
+                "Transactions": [
+                    "Deposited $500 at Mon Mar 22 09:34:30 2021\n"
+                ]
+            }
+        },
+        "CustomerInfo": {
+            "Address": "34 3rd St",
+            "City": "Macon",
+            "FirstName": "Eric",
+            "LastName": "Wiley",
+            "Password": 7091454244313711242,
+            "State": "GA",
+            "ZipCode": "31201"
+        }
+    }
+}

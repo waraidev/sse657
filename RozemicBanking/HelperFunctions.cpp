@@ -15,14 +15,13 @@ UserAccounts* getAccount(bool hasAccount);
 void accountServices(UserAccounts *accounts);
 void saveJson(UserAccounts *accounts);
 
-
-
 /***************************************************************
 <array> was chosen due to the input requirements being the same
 for all users.
 ****************************************************************/
 
-array<string, 6> customerHome(
+array<string, 7> customerHome(
+	string password = "N/A",
     string firstname = "N/A", 
     string lastname = "N/A", 
     string address = "N/A", 
@@ -33,7 +32,7 @@ array<string, 6> customerHome(
 //Implementations
 
 UserAccounts* getAccount(bool hasAccount) {
-    array<string, 6> customer;
+    array<string, 7> customer;
     double initBalance;
     double limit;
 
@@ -52,7 +51,8 @@ UserAccounts* getAccount(bool hasAccount) {
 
         initAccounts(accounts, initBalance);
 
-        accounts->setCustomer(CustomerInfo(customer[0], customer[1], customer[2], customer[3], customer[4], customer[5]));
+        accounts->setCustomer(CustomerInfo(customer[0], customer[1], customer[2],
+        		customer[3], customer[4], customer[5], customer[6]));
 
         cout << accounts->getCustomer().printInfo() << endl;
         cout << "Your checking balance is $" << checkingBalance(accounts) << endl;
@@ -181,6 +181,7 @@ void saveJson(UserAccounts *accounts) {
         accounts->getSavings().getTransactionLimit(),   // Transaction Limit
         accounts->getSavings().getTransactions(),       // Vector of all transactions
         //Customer Info
+        accounts->getCustomer().password,		// Password
         accounts->getCustomer().firstname,      // First Name
         accounts->getCustomer().lastname,       // Last Name
         accounts->getCustomer().address,        // Address
@@ -214,7 +215,10 @@ double checkingBalance(UserAccounts *accounts) {
     return accounts->getChecking().getBalance();
 }
 
-array<string, 6> customerHome(string firstname, string lastname, string address, string city, string state, string zip) {
+array<string, 7> customerHome(string password,
+		string firstname, string lastname,
+		string address, string city,
+		string state, string zip) {
     /*************************************************************
     This function will be used to input user information.
     Defaulting to N/A will allow searches for incomplete entries.
@@ -233,6 +237,13 @@ array<string, 6> customerHome(string firstname, string lastname, string address,
         cin >> input1;
         lastname = input1;
         cout << endl;
+    }
+
+    if(password == "N/A") {
+    	cout << "Enter Password: ";
+    	cin >> input1;
+    	password = input1;
+    	cout << endl;
     }
 
     if (address == "N/A") {
@@ -268,7 +279,7 @@ array<string, 6> customerHome(string firstname, string lastname, string address,
         cout << endl;
     }
 
-    array<string, 6> newcustomer = {firstname, lastname, address, city, state, zip};
+    array<string, 7> newcustomer = {password, firstname, lastname, address, city, state, zip};
 
     return newcustomer;
 

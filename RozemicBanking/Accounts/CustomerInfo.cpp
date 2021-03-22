@@ -5,9 +5,10 @@
 using namespace std;
 
 //Constructor
-CustomerInfo::CustomerInfo(std::string first, std::string last, std::string address, 
-                            std::string city, std::string state, std::string zip) 
+CustomerInfo::CustomerInfo(string password, string first, string last, string address, 
+                            string city, string state, string zip) 
 {
+    this->password = password;
     this->firstname = first;
     this->lastname = last;
     this->address = address;
@@ -19,6 +20,7 @@ CustomerInfo::CustomerInfo(std::string first, std::string last, std::string addr
 //Copy Constructor
 CustomerInfo::CustomerInfo(const CustomerInfo &value) 
 {
+    this->password = value.password;
     this->firstname = value.firstname;
     this->lastname = value.lastname;
     this->address = value.address;
@@ -45,11 +47,6 @@ string CustomerInfo::printInfo() {
     	+ "Address:\t" + this->address + "\n"
     	+ "City:\t\t" + this->city + "\n"
     	+ "State:\t\t" + this->state + "\n"
-    	+ "Zip Code:\t" + this->zipcode + "\n";
+    	+ "Zip Code:\t" + this->zipcode + "\n"
+        + "Password Status:\t Valid!";
 }
-
-// int main()
-// {
-// 	CustomerInfo addcustomer("John", "Doe","3001 Mercer University Dr", "Atlanta", "GA", "30341");
-// 	std::cout << addcustomer << '\n';
-// }

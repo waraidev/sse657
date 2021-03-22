@@ -4,6 +4,9 @@
 
 #include "Access.h"
 #include <uuid/uuid.h>
+#include <functional>
+#include <sstream>
+
 
 using json = nlohmann::json;
 using namespace std;
@@ -144,41 +147,48 @@ json UserAccounts::getJson() {
 
 json UserAccounts::setJson(
     double c_balance, double c_total, 
-    double c_limit, std::vector<std::string> c_transactions,
+    double c_limit, vector<string> c_transactions,
     double s_balance, double s_total,
-    double s_limit, std::vector<std::string> s_transactions,
-    std::string firstname, std::string lastname,
-    std::string address, std::string city,
-    std::string state, std::string zipcode) 
+    double s_limit, vector<string> s_transactions,
+    string password, string firstname, string lastname, 
+    string address, string city, 
+    string state, string zipcode) 
     {
 
     uuid_t id;
-    uuid_generate_random(id);
+    uuid_generate(id);
+    unsigned long long data = *reinterpret_cast<unsigned long long*>(id);
+    stringstream id_str;
+    id_str << data;
+
+    hash<string> str_hash;
 
     json j = {
-        { "Accounts", {
-            { "Checking", {
-                { "Balance", c_balance },
-                { "TransactionTotal", c_total },
-                { "TransactionLimit", c_limit },
-                { "Transactions", c_transactions }
+        { id_str.str(), {
+            { "Accounts", {
+                { "Checking", {
+                    { "Balance", c_balance },
+                    { "TransactionTotal", c_total },
+                    { "TransactionLimit", c_limit },
+                    { "Transactions", c_transactions }
+                }},
+                { "Savings", {
+                    { "Balance", s_balance },
+                    { "TransactionTotal", s_total },
+                    { "TransactionLimit", s_limit },
+                    { "Transactions", s_transactions }
+                }},
             }},
-            { "Savings", {
-                { "Balance", s_balance },
-                { "TransactionTotal", s_total },
-                { "TransactionLimit", s_limit },
-                { "Transactions", s_transactions }
-            }},
-        }},
-        { "CustomerInfo", {
-            { "FirstName", firstname },
-            { "LastName", lastname },
-            { "Address", address },
-            { "City", city },
-            { "State", state },
-            { "ZipCode", zipcode }
-        }},
-        { "ID", id}
+            { "CustomerInfo", {
+                { "Password", str_hash(password)},
+                { "FirstName", firstname },
+                { "LastName", lastname },
+                { "Address", address },
+                { "City", city },
+                { "State", state },
+                { "ZipCode", zipcode }
+            }}
+        }}
     };
 
     fstream file("RozemicBanking/json/accounts.json", 

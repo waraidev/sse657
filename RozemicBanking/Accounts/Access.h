@@ -42,6 +42,7 @@ class CustomerInfo
     private:
 
     public:
+        std::string password;
         std::string firstname;
         std::string lastname;
         std::string address;
@@ -50,7 +51,8 @@ class CustomerInfo
         std::string zipcode;
         
         //Constructor
-        CustomerInfo(std::string firstname = "N/A",
+        CustomerInfo(std::string password = "N/A",   
+                        std::string firstname = "N/A",
                         std::string lastname = "N/A",
                         std::string address = "N/A",
                         std::string city = "N/A",
@@ -70,6 +72,7 @@ class CustomerInfo
         void swap(CustomerInfo &lhs, CustomerInfo &rhs) 
         {
             using std::swap;
+            swap(lhs.password, rhs.password);
             swap(lhs.firstname, rhs.firstname);
             swap(lhs.lastname, rhs.lastname);
             swap(lhs.address, rhs.address);
@@ -170,8 +173,8 @@ public:
         double c_limit, std::vector<std::string> c_transactions,
         double s_balance, double s_total,
         double s_limit, std::vector<std::string> s_transactions,
-        std::string firstname, std::string lastname,
-        std::string address, std::string city,
+        std::string password, std::string firstname, std::string lastname,
+        std::string address, std::string city, 
         std::string state, std::string zipcode);
 
     void setJson(nlohmann::json obj);
