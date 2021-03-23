@@ -3,10 +3,7 @@
 //
 
 #include "Access.h"
-#include <uuid/uuid.h>
 #include <functional>
-#include <sstream>
-
 
 using json = nlohmann::json;
 using namespace std;
@@ -155,16 +152,10 @@ json UserAccounts::setJson(
     string state, string zipcode) 
     {
 
-    uuid_t id;
-    uuid_generate(id);
-    unsigned long long data = *reinterpret_cast<unsigned long long*>(id);
-    stringstream id_str;
-    id_str << data;
-
     hash<string> str_hash;
 
     json j = {
-        { id_str.str(), {
+        { uuid::generate_uuid_v4(), {
             { "Accounts", {
                 { "Checking", {
                     { "Balance", c_balance },

@@ -37,6 +37,7 @@ UserAccounts* getAccount(bool hasAccount) {
     double limit;
 
     if(hasAccount) {
+        
         return 0;
 
     } else {
