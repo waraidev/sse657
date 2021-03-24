@@ -1,5 +1,6 @@
 #include <string>
 #include <array>
+#include <functional>
 #include "Accounts/Access.h"
 
 using namespace std;
@@ -13,7 +14,7 @@ double checkingBalance(UserAccounts *accounts);
 void initAccounts(UserAccounts *accounts, double initBalance);
 UserAccounts* getAccount(bool hasAccount);
 void accountServices(UserAccounts *accounts);
-void saveJson(UserAccounts *accounts);
+void saveJson(UserAccounts *accounts, json jFile = NULL);
 
 /***************************************************************
 <array> was chosen due to the input requirements being the same
@@ -36,8 +37,22 @@ UserAccounts* getAccount(bool hasAccount) {
     double initBalance;
     double limit;
 
+    UserAccounts *accounts = accounts->createAccount();
+
     if(hasAccount) {
-        
+        hash<string> str_hash;
+        string password;
+        string account_id;
+
+        cout << "What is your password: ";
+        cin >> password;
+        cout << endl;
+
+        json jFile = accounts->getJson();
+        for(json::iterator it = jFile["Users"].begin(); it != jFile.end(); ++it) {
+            cout << it["CustomerInfo"] << endl;;
+            //Recursive?
+        }
         return 0;
 
     } else {
@@ -47,8 +62,6 @@ UserAccounts* getAccount(bool hasAccount) {
         cout << "What is your initial balance?" << endl;
 
         cin >> initBalance;
-
-        UserAccounts *accounts = accounts->createAccount();
 
         initAccounts(accounts, initBalance);
 
@@ -169,8 +182,8 @@ void accountServices(UserAccounts *accounts) {
     }
 }
 
-void saveJson(UserAccounts *accounts) {
-    json jsonFile = accounts->setJson(
+void saveJson(UserAccounts *accounts, json jFile) {
+    accounts->setJson(
         //Checking
         checkingBalance(accounts),                      // Account Balance
         accounts->getChecking().getTransactionTotal(),  // Transaction Total
@@ -188,7 +201,8 @@ void saveJson(UserAccounts *accounts) {
         accounts->getCustomer().address,        // Address
         accounts->getCustomer().city,           // City
         accounts->getCustomer().state,          // State
-        accounts->getCustomer().zipcode         // Zip Code
+        accounts->getCustomer().zipcode,         // Zip Code
+        jFile
         );
 }
 

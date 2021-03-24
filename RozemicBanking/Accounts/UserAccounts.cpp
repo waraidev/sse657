@@ -87,6 +87,11 @@ void UserAccounts::withdraw(double amount) {
     }
 }
 
+/**
+ * Transfers money between checking and savings accounts.
+ * @param sending Char that represents where the money is sent from.
+ * @param receiving Char that represent where the money is sent to.
+ */
 void UserAccounts::transfer(char sending, char receiving, double amount) {
     if(this->checking.checkLimit(amount) && this->savings.checkLimit(amount)) {
         if(sending == 'C' && receiving == 'S') {
@@ -106,32 +111,49 @@ void UserAccounts::transfer(char sending, char receiving, double amount) {
     cout << "Your savings balance is $" << this->savings.getBalance() << endl; 
 }
 
+/**
+ * Gets checking account.
+ */
 BankAccount UserAccounts::getChecking() {
     return this->checking;
 }
 
+/**
+ * Sets checking account
+ */
 void UserAccounts::setChecking(BankAccount check) {
     this->checking = check;
 }
 
+/**
+ * Gets savings account.
+ */
 BankAccount UserAccounts::getSavings() {
     return this->savings;
 }
 
+/**
+ * Sets savings account.
+ */
 void UserAccounts::setSavings(BankAccount save) {
     this->savings = save;
 }
 
-//private
+/**
+ * Prints statement if transaction limit is exceeeded.
+ * (Private function)
+ */
 void UserAccounts::printLimitExceeded() {
     cout << "Transaction Limit was exceeded with this purchase.";
     cout << " Transaction will not be processed." << endl;
 }
 
+/**
+ * Gets JSON file for program.
+ */
 json UserAccounts::getJson() {
-    fstream file;
+    fstream file("RozemicBanking/json/accounts.json", fstream::in);
     json j;
-    file.open("../json/accounts.json");
     if(file) {
         file >> j;
     } else {
@@ -142,6 +164,11 @@ json UserAccounts::getJson() {
     return j;
 }
 
+/**
+ * Sets JSON file for program. Params are account data.
+ * @param jFile Default is NULL. Leave blank if JSON file does
+ * not exist.
+ */
 json UserAccounts::setJson(
     double c_balance, double c_total, 
     double c_limit, vector<string> c_transactions,
@@ -149,13 +176,45 @@ json UserAccounts::setJson(
     double s_limit, vector<string> s_transactions,
     string password, string firstname, string lastname, 
     string address, string city, 
-    string state, string zipcode) 
+    string state, string zipcode,
+    json jFile) 
     {
 
     hash<string> str_hash;
 
-    json j = {
-        { uuid::generate_uuid_v4(), {
+    if(jFile == NULL) {
+        json temp = {
+            { "Users", {
+                { uuid::generate_uuid(), {
+                    { "Accounts", {
+                        { "Checking", {
+                            { "Balance", c_balance },
+                            { "TransactionTotal", c_total },
+                            { "TransactionLimit", c_limit },
+                            { "Transactions", c_transactions }
+                        }},
+                        { "Savings", {
+                            { "Balance", s_balance },
+                            { "TransactionTotal", s_total },
+                            { "TransactionLimit", s_limit },
+                            { "Transactions", s_transactions }
+                        }},
+                    }},
+                    { "CustomerInfo", {
+                        { "Password", str_hash(password)},
+                        { "FirstName", firstname },
+                        { "LastName", lastname },
+                        { "Address", address },
+                        { "City", city },
+                        { "State", state },
+                        { "ZipCode", zipcode }
+                    }}
+                }}
+            }}
+        };
+        jFile = temp;
+    } else {
+        json temp = { uuid::generate_uuid(), {
             { "Accounts", {
                 { "Checking", {
                     { "Balance", c_balance },
@@ -179,17 +238,19 @@ json UserAccounts::setJson(
                 { "State", state },
                 { "ZipCode", zipcode }
             }}
-        }}
-    };
+        }};
+
+        jFile["Users"].push_back(temp);
+    }
 
     fstream file("RozemicBanking/json/accounts.json", 
-        fstream::in | fstream::out | fstream::app);
+        fstream::in | fstream::out | fstream::trunc);
     if(file) {
-        file << setw(4) << j;
+        file << setw(4) << jFile;
     }
     file.close();
 
-    return j;
+    return jFile;
 }
 
 void UserAccounts::setJson(json obj) {

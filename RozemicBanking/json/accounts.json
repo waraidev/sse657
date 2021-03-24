@@ -1,31 +1,29 @@
 {
-    "75424ab1-3eb8-438f-8fb4-2b12f68c5f38": {
-        "Accounts": {
-            "Checking": {
-                "Balance": 4400.0,
-                "TransactionLimit": 700.0,
-                "TransactionTotal": 600.0,
-                "Transactions": [
-                    "Withdrew $600 at Tue Mar 23 13:02:04 2021\n"
-                ]
+    "Users": {
+        "b849e215-ec6d-4286-a39f-0661b7b4dd66": {
+            "Accounts": {
+                "Checking": {
+                    "Balance": 5000.0,
+                    "TransactionLimit": 700.0,
+                    "TransactionTotal": 0.0,
+                    "Transactions": []
+                },
+                "Savings": {
+                    "Balance": 0.0,
+                    "TransactionLimit": 700.0,
+                    "TransactionTotal": 0.0,
+                    "Transactions": []
+                }
             },
-            "Savings": {
-                "Balance": 600.0,
-                "TransactionLimit": 700.0,
-                "TransactionTotal": 600.0,
-                "Transactions": [
-                    "Deposited $600 at Tue Mar 23 13:02:04 2021\n"
-                ]
+            "CustomerInfo": {
+                "Address": "32 Macon St",
+                "City": "Macon",
+                "FirstName": "Eric",
+                "LastName": "Wiley",
+                "Password": 7091454244313711242,
+                "State": "GA",
+                "ZipCode": "31000"
             }
-        },
-        "CustomerInfo": {
-            "Address": "62 3rd St",
-            "City": "Macon",
-            "FirstName": "Eric",
-            "LastName": "Wiley",
-            "Password": 12837685672523717991,
-            "State": "GA",
-            "ZipCode": "31201"
         }
     }
 }

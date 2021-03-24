@@ -23,6 +23,15 @@ BankAccount::BankAccount(double initialBalance) {
     this->transactionTotal = 0;
 }
 
+BankAccount::BankAccount(double balance, double transactionLimit,
+            double transactionTotal, std::vector<std::string> transactions) 
+{
+    this->balance = balance;
+    this->transactionLimit = transactionLimit;
+    this->transactionTotal = transactionTotal;
+    this->transactionList = transactions;
+}
+
 /**
  * Gets the current balance of the bank account.
  * @return The current balance.

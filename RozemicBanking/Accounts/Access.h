@@ -45,7 +45,7 @@ namespace uuid {
     static std::uniform_int_distribution<> dis(0, 15);
     static std::uniform_int_distribution<> dis2(8, 11);
 
-    std::string generate_uuid_v4() {
+    std::string generate_uuid() {
         std::stringstream ss;
         int i;
         ss << std::hex;
@@ -214,7 +214,8 @@ public:
         double s_limit, std::vector<std::string> s_transactions,
         std::string password, std::string firstname, std::string lastname,
         std::string address, std::string city, 
-        std::string state, std::string zipcode);
+        std::string state, std::string zipcode,
+        nlohmann::json jFile);
 
     void setJson(nlohmann::json obj);
 };
