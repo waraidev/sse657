@@ -16,6 +16,8 @@ UserAccounts* getAccount(bool hasAccount);
 void accountServices(UserAccounts *accounts);
 void saveJson(UserAccounts *accounts, json jFile = NULL);
 
+string check_pass(json j, string pass);
+
 /***************************************************************
 <array> was chosen due to the input requirements being the same
 for all users.
@@ -30,7 +32,22 @@ array<string, 7> customerHome(
     string state = "N/A", 
     string zip = "N/A");
 
+
+
 //Implementations
+
+string check_pass(json j, string pass) {
+    for(auto& el : j.items()) {
+        try {
+            if(j[el.key()]["CustomerInfo"]["Password"] == pass)
+                return el.key();
+        } catch (int e) {
+            cout << "An error occurred: " << e << endl;
+        }
+    }
+
+    return "";
+}
 
 UserAccounts* getAccount(bool hasAccount) {
     array<string, 7> customer;
@@ -49,11 +66,21 @@ UserAccounts* getAccount(bool hasAccount) {
         cout << endl;
 
         json jFile = accounts->getJson();
-        for(json::iterator it = jFile["Users"].begin(); it != jFile.end(); ++it) {
-            cout << it["CustomerInfo"] << endl;;
-            //Recursive?
+        account_id = check_pass(jFile["Users"], to_string(str_hash(password)));
+        if(account_id == "")
+            return 0;
+        else {
+            accounts->setAccountData(jFile, account_id);
+
+            cout << accounts->getCustomer().printInfo() << "\n" << endl;
+            cout << "Your checking balance is $" << checkingBalance(accounts) << endl;
+            cout << "Your savings balance is $" << savingsBalance(accounts) << endl;
+
+            cout << "Your daily transaction limit is $" << accounts->getChecking().getTransactionLimit() << endl;
+            cout << "Your transaction total has been reset for the day!" << endl;
+
+            return accounts;
         }
-        return 0;
 
     } else {
         //Setup customer account info

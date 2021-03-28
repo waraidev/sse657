@@ -187,6 +187,8 @@ private:
 public:
     static UserAccounts* createAccount();
 
+    void setAccountData(nlohmann::json jFile, std::string account_id);
+
     void deposit(double amount, bool isSavings);
 
     void withdraw(double amount);

@@ -25,6 +25,45 @@ UserAccounts* UserAccounts::createAccount() {
 }
 
 /**
+ * Retrieves all UserAccounts data from a JSON file. 
+ * Must only be run after UserAccounts object
+ * is initialized and password is checked.
+ */
+void UserAccounts::setAccountData(json jFile, string account_id) {
+    json info = jFile["Users"][account_id]["CustomerInfo"];
+    json checking = jFile["Users"][account_id]["Accounts"]["Checking"];
+    json savings = jFile["Users"][account_id]["Accounts"]["Savings"];
+
+    CustomerInfo c = CustomerInfo(
+        info["Password"],
+        info["FirstName"],
+        info["LastName"],
+        info["Address"],
+        info["City"],
+        info["State"],
+        info["ZipCode"]
+    );
+
+    BankAccount check = BankAccount(
+        checking["Balance"],
+        checking["TransactionLimit"],
+        0, // TransactionTotal
+        checking["Transactions"]
+    );
+
+    BankAccount save = BankAccount(
+        savings["Balance"],
+        savings["TransactionLimit"],
+        0, // TransactionTotal
+        savings["Transactions"]
+    );
+
+    setCustomer(c);
+    setChecking(check);
+    setSavings(save);
+}
+
+/**
  * Gets the CustomerInfo object associated
  * with the UserAccount
  */
@@ -201,7 +240,7 @@ json UserAccounts::setJson(
                         }},
                     }},
                     { "CustomerInfo", {
-                        { "Password", str_hash(password)},
+                        { "Password", to_string(str_hash(password))},
                         { "FirstName", firstname },
                         { "LastName", lastname },
                         { "Address", address },
@@ -230,7 +269,7 @@ json UserAccounts::setJson(
                 }},
             }},
             { "CustomerInfo", {
-                { "Password", str_hash(password)},
+                { "Password", to_string(str_hash(password))},
                 { "FirstName", firstname },
                 { "LastName", lastname },
                 { "Address", address },

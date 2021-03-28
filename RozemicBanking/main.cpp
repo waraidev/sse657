@@ -40,10 +40,14 @@ int main(void) {
             return 0;
     }
 
-    accountServices(accounts);
+    if(accounts == 0) {
+        cout << "We apologize, but this account does not exist!" << endl;
+    } else {
+        accountServices(accounts);
 
-    //Save to JSON
-    saveJson(accounts);
+        //Save to JSON
+        saveJson(accounts);
+    }
 
     //Finishing Bank Use//
     cout << "Thank you for choosing Rozemic Banking! Have a great day!" << endl;
