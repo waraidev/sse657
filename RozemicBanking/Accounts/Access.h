@@ -2,8 +2,14 @@
 #define ACCESS
 
 #include <iostream>
-#include <string>
-#include <vector>
+#include <fstream>
+#include <ctime>
+#include <cstdlib>
+#include <random>
+#include <sstream>
+
+// #include <vector> and <string> from json.hpp
+#include "../External/json.hpp"
 
 /*
 #include <thread>
@@ -33,21 +39,56 @@
 	};
 */
 
+namespace uuid {
+    static std::random_device              rd;
+    static std::mt19937                    gen(rd());
+    static std::uniform_int_distribution<> dis(0, 15);
+    static std::uniform_int_distribution<> dis2(8, 11);
+
+    std::string generate_uuid() {
+        std::stringstream ss;
+        int i;
+        ss << std::hex;
+        for (i = 0; i < 8; i++) {
+            ss << dis(gen);
+        }
+        ss << "-";
+        for (i = 0; i < 4; i++) {
+            ss << dis(gen);
+        }
+        ss << "-4";
+        for (i = 0; i < 3; i++) {
+            ss << dis(gen);
+        }
+        ss << "-";
+        ss << dis2(gen);
+        for (i = 0; i < 3; i++) {
+            ss << dis(gen);
+        }
+        ss << "-";
+        for (i = 0; i < 12; i++) {
+            ss << dis(gen);
+        };
+        return ss.str();
+    }
+}
+
 class CustomerInfo 
 {
     private:
+
+    public:
+        std::string password;
         std::string firstname;
         std::string lastname;
         std::string address;
         std::string city;
         std::string state;
         std::string zipcode;
-
-    protected:
-
-    public:
+        
         //Constructor
-        CustomerInfo(std::string firstname = "N/A",
+        CustomerInfo(std::string password = "N/A",   
+                        std::string firstname = "N/A",
                         std::string lastname = "N/A",
                         std::string address = "N/A",
                         std::string city = "N/A",
@@ -67,6 +108,7 @@ class CustomerInfo
         void swap(CustomerInfo &lhs, CustomerInfo &rhs) 
         {
             using std::swap;
+            swap(lhs.password, rhs.password);
             swap(lhs.firstname, rhs.firstname);
             swap(lhs.lastname, rhs.lastname);
             swap(lhs.address, rhs.address);
@@ -96,7 +138,12 @@ class BankAccount
 
         BankAccount(double initialBalance);
 
+        BankAccount(double balance, double transactionLimit,
+            double transactionTotal, std::vector<std::string> transactions);
+
         double getBalance();
+
+        double getTransactionTotal();
 
         void deposit(double amount);
 
@@ -104,9 +151,11 @@ class BankAccount
 
         std::vector<std::string> getTransactions();
 
-        std::vector<std::string> addTransaction(std::string transaction);
+        void addTransaction(std::string transaction);
 
-        std::vector<std::string> transactionList; 
+        std::vector<std::string> transactionList;
+
+        double getTransactionLimit(); 
 
         void setTransactionLimit(double limit);     
 
@@ -118,6 +167,7 @@ class BankAccount
 /** A user account that has a balance that can be changed by deposits and withdrawals. */
 class UserAccounts 
 {
+    friend class BankAccountFixture;
 
 private:
     BankAccount checking;
@@ -137,6 +187,8 @@ private:
 public:
     static UserAccounts* createAccount();
 
+    void setAccountData(nlohmann::json jFile, std::string account_id);
+
     void deposit(double amount, bool isSavings);
 
     void withdraw(double amount);
@@ -154,6 +206,20 @@ public:
     BankAccount getSavings();
 
     void setSavings(BankAccount save);
+
+    nlohmann::json getJson();
+
+    nlohmann::json setJson(
+        double c_balance, double c_total, 
+        double c_limit, std::vector<std::string> c_transactions,
+        double s_balance, double s_total,
+        double s_limit, std::vector<std::string> s_transactions,
+        std::string password, std::string firstname, std::string lastname,
+        std::string address, std::string city, 
+        std::string state, std::string zipcode,
+        nlohmann::json jFile);
+
+    void setJson(nlohmann::json obj);
 };
 
 #endif

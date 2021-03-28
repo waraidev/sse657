@@ -1,0 +1,33 @@
+{
+    "Users": {
+        "395b4089-f232-4f36-83ad-25a624ce5b99": {
+            "Accounts": {
+                "Checking": {
+                    "Balance": 195500.0,
+                    "TransactionLimit": 8000.0,
+                    "TransactionTotal": 4500.0,
+                    "Transactions": [
+                        "Withdrew $4500 at Sun Mar 28 16:40:49 2021\n"
+                    ]
+                },
+                "Savings": {
+                    "Balance": 4500.0,
+                    "TransactionLimit": 8000.0,
+                    "TransactionTotal": 4500.0,
+                    "Transactions": [
+                        "Deposited $4500 at Sun Mar 28 16:40:49 2021\n"
+                    ]
+                }
+            },
+            "CustomerInfo": {
+                "Address": "56 Tree St",
+                "City": "Sycamore",
+                "FirstName": "Rozell",
+                "LastName": "Dixon",
+                "Password": "10521637655138586508",
+                "State": "GA",
+                "ZipCode": "50300"
+            }
+        }
+    }
+}
