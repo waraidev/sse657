@@ -195,8 +195,6 @@ json UserAccounts::getJson() {
     json j;
     if(file) {
         file >> j;
-    } else {
-        cout << "No file found. Empty JSON file will be output." << endl;
     }
 
     file.close();
@@ -251,9 +249,12 @@ json UserAccounts::setJson(
                 }}
             }}
         };
+
         jFile = temp;
+
+        
     } else {
-        json temp = { uuid::generate_uuid(), {
+        json temp = {
             { "Accounts", {
                 { "Checking", {
                     { "Balance", c_balance },
@@ -277,9 +278,9 @@ json UserAccounts::setJson(
                 { "State", state },
                 { "ZipCode", zipcode }
             }}
-        }};
+        };
 
-        jFile["Users"].push_back(temp);
+        jFile["Users"][uuid::generate_uuid()] = temp;
     }
 
     fstream file("RozemicBanking/json/accounts.json", 

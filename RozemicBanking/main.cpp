@@ -45,8 +45,13 @@ int main(void) {
     } else {
         accountServices(accounts);
 
-        //Save to JSON
-        saveJson(accounts);
+        json jFile = accounts->getJson();
+
+        // Save to JSON
+        if(jFile == NULL)
+            saveJson(accounts);
+        else
+            saveJson(accounts, jFile);
     }
 
     //Finishing Bank Use//

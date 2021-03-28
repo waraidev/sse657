@@ -1,32 +1,32 @@
 {
     "Users": {
-        "1a345e5e-6de0-4e0e-bebe-e70caf7032ba": {
+        "395b4089-f232-4f36-83ad-25a624ce5b99": {
             "Accounts": {
                 "Checking": {
-                    "Balance": 4400.0,
-                    "TransactionLimit": 700.0,
-                    "TransactionTotal": 600.0,
+                    "Balance": 195500.0,
+                    "TransactionLimit": 8000.0,
+                    "TransactionTotal": 4500.0,
                     "Transactions": [
-                        "Withdrew $600 at Sun Mar 28 14:27:14 2021\n"
+                        "Withdrew $4500 at Sun Mar 28 16:40:49 2021\n"
                     ]
                 },
                 "Savings": {
-                    "Balance": 600.0,
-                    "TransactionLimit": 700.0,
-                    "TransactionTotal": 600.0,
+                    "Balance": 4500.0,
+                    "TransactionLimit": 8000.0,
+                    "TransactionTotal": 4500.0,
                     "Transactions": [
-                        "Deposited $600 at Sun Mar 28 14:27:14 2021\n"
+                        "Deposited $4500 at Sun Mar 28 16:40:49 2021\n"
                     ]
                 }
             },
             "CustomerInfo": {
-                "Address": "32 6th St",
-                "City": "Macon",
-                "FirstName": "Eric",
-                "LastName": "Wiley",
-                "Password": "9035609549440765079",
+                "Address": "56 Tree St",
+                "City": "Sycamore",
+                "FirstName": "Rozell",
+                "LastName": "Dixon",
+                "Password": "10521637655138586508",
                 "State": "GA",
-                "ZipCode": "31000"
+                "ZipCode": "50300"
             }
         }
     }
