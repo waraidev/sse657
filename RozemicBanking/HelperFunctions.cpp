@@ -16,8 +16,6 @@ UserAccounts* getAccount(bool hasAccount);
 void accountServices(UserAccounts *accounts);
 void saveJson(UserAccounts *accounts, json jFile = NULL);
 
-string check_pass(json j, string pass);
-
 /***************************************************************
 <array> was chosen due to the input requirements being the same
 for all users.
@@ -36,19 +34,6 @@ array<string, 7> customerHome(
 
 //Implementations
 
-string check_pass(json j, string pass) {
-    for(auto& el : j.items()) {
-        try {
-            if(j[el.key()]["CustomerInfo"]["Password"] == pass)
-                return el.key();
-        } catch (int e) {
-            cout << "An error occurred: " << e << endl;
-        }
-    }
-
-    return "";
-}
-
 UserAccounts* getAccount(bool hasAccount) {
     array<string, 7> customer;
     double initBalance;
@@ -66,7 +51,7 @@ UserAccounts* getAccount(bool hasAccount) {
         cout << endl;
 
         json jFile = accounts->getJson();
-        account_id = check_pass(jFile["Users"], to_string(str_hash(password)));
+        account_id = accounts->check_pass(jFile["Users"], to_string(str_hash(password)));
         if(account_id == "")
             return 0;
         else {
@@ -282,14 +267,15 @@ array<string, 7> customerHome(string password,
     }
 
     if(password == "N/A") {
+        hash<string> str_hash;
     	cout << "Enter Password: ";
     	cin >> input1;
-    	password = input1;
+    	password = to_string(str_hash(input1));
     	cout << endl;
     }
 
     if (address == "N/A") {
-        cout << "Enter Address: (Hit ENTER twice!)" << endl;
+        cout << "Enter Address:" << endl;
         /***************************************************
         Use getline to allow input that will be more than a
         word long.

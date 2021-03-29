@@ -149,6 +149,8 @@ class BankAccount
 
         void withdraw(double amount);
 
+        void withdraw(double amount, std::string description, std::string company);
+
         std::vector<std::string> getTransactions();
 
         void addTransaction(std::string transaction);
@@ -193,6 +195,8 @@ public:
 
     void withdraw(double amount);
 
+    void withdraw(double amount, std::string description, std::string company);
+
     void transfer(char sending, char receiving, double amount);
 
     CustomerInfo getCustomer();
@@ -220,6 +224,8 @@ public:
         nlohmann::json jFile);
 
     void setJson(nlohmann::json obj);
+
+    std::string check_pass(nlohmann::json jFile, std::string pass);
 };
 
 #endif
