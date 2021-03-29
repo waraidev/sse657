@@ -4,8 +4,6 @@ project(sse657)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(sse657
-        RozemicBanking/main.cpp 
-        RozemicBanking/Payment.cpp 
-        RozemicBanking/Payment.h
+        RozemicBanking/main.cpp
         )
 add_subdirectory(Google_tests)
