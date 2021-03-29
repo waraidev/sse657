@@ -1,32 +1,32 @@
 {
     "Users": {
-        "395b4089-f232-4f36-83ad-25a624ce5b99": {
+        "435f436e-03ba-4314-a566-e93d72465503": {
             "Accounts": {
                 "Checking": {
-                    "Balance": 195500.0,
-                    "TransactionLimit": 8000.0,
-                    "TransactionTotal": 4500.0,
+                    "Balance": 4300.0,
+                    "TransactionLimit": 950.0,
+                    "TransactionTotal": 700.0,
                     "Transactions": [
-                        "Withdrew $4500 at Sun Mar 28 16:40:49 2021\n"
+                        "Apple withdrew $700 for a purchase of iPhone 12 mini at Mon Mar 29 13:16:04 2021\n"
                     ]
                 },
                 "Savings": {
-                    "Balance": 4500.0,
-                    "TransactionLimit": 8000.0,
-                    "TransactionTotal": 4500.0,
+                    "Balance": 50.0,
+                    "TransactionLimit": 950.0,
+                    "TransactionTotal": 0.0,
                     "Transactions": [
-                        "Deposited $4500 at Sun Mar 28 16:40:49 2021\n"
+                        "Deposited $50 at Mon Mar 29 12:04:50 2021\n"
                     ]
                 }
             },
             "CustomerInfo": {
-                "Address": "56 Tree St",
-                "City": "Sycamore",
-                "FirstName": "Rozell",
-                "LastName": "Dixon",
-                "Password": "10521637655138586508",
+                "Address": "32 Tree St",
+                "City": "Macon",
+                "FirstName": "Eric",
+                "LastName": "Wiley",
+                "Password": "7091454244313711242",
                 "State": "GA",
-                "ZipCode": "50300"
+                "ZipCode": "31200"
             }
         }
     }

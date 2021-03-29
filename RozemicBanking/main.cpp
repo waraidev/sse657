@@ -12,14 +12,43 @@
 #include "Accounts/BankAccount.cpp"
 #include "Accounts/CustomerInfo.cpp"
 #include "HelperFunctions.cpp"
+#include "BusinessTransactions.cpp"
 
 using namespace std;
 using json = nlohmann::json;
 
 int main(void) {
-    char hasAccount;
 
     UserAccounts *accounts;
+
+    if(businessAccount()) {
+        string id;
+        cout << "What is the ID of the purchasing account?" << endl;
+        cin >> id;
+        cout << endl;
+
+        accounts = accounts->createAccount();
+        json jFile = accounts->getJson();
+        
+        try {
+            if(jFile["Users"].at(id) != 0) {
+                cout << "You choose ID number: " << id << endl;
+            }
+        } catch (json::exception& e) {
+            cout << "Invalid ID: " << e.id << endl;
+            return 0;
+        }
+
+        accounts->setAccountData(jFile, id);
+
+        submitTransaction(accounts);
+
+        saveJson(accounts, jFile);
+
+        return 0;
+    }
+
+    char hasAccount;
 
     cout << "Do you already have an account with Rozemic Banking? (Y/N)" << endl;
 

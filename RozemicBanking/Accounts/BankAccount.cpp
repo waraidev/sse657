@@ -68,9 +68,18 @@ void BankAccount::withdraw(double amount) {
     time_t now = time(0);
     char* dt = ctime(&now);
 
-
-
     addTransaction("Withdrew $" + stdplus::to_string(amount) + " at " + dt);
+    addToTransactionTotal(amount);
+}
+
+void BankAccount::withdraw(double amount, string description, string company) {
+    this->balance -= amount;
+
+    time_t now = time(0);
+    char* dt = ctime(&now);
+
+    addTransaction(company + " withdrew $" + stdplus::to_string(amount) + 
+        " for a purchase of " + description + " at " + dt);
     addToTransactionTotal(amount);
 }
 

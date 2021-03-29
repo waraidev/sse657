@@ -127,6 +127,20 @@ void UserAccounts::withdraw(double amount) {
 }
 
 /**
+ * This function is used by a Business to withdraw for a purchase.
+ * @param amount The amount to withdraw.
+ * @param description The description or name of the purchase product.
+ * @param company The name of the business.
+ */
+void UserAccounts::withdraw(double amount, string description, string company) {
+    if(this->checking.checkLimit(amount)) {
+        this->checking.withdraw(amount, description, company);
+    } else {
+        printLimitExceeded();
+    }
+}
+
+/**
  * Transfers money between checking and savings accounts.
  * @param sending Char that represents where the money is sent from.
  * @param receiving Char that represent where the money is sent to.
@@ -238,7 +252,7 @@ json UserAccounts::setJson(
                         }},
                     }},
                     { "CustomerInfo", {
-                        { "Password", to_string(str_hash(password))},
+                        { "Password", password},
                         { "FirstName", firstname },
                         { "LastName", lastname },
                         { "Address", address },
@@ -270,7 +284,7 @@ json UserAccounts::setJson(
                 }},
             }},
             { "CustomerInfo", {
-                { "Password", to_string(str_hash(password))},
+                { "Password", password},
                 { "FirstName", firstname },
                 { "LastName", lastname },
                 { "Address", address },
@@ -280,7 +294,15 @@ json UserAccounts::setJson(
             }}
         };
 
-        jFile["Users"][uuid::generate_uuid()] = temp;
+        string account_id = check_pass(jFile["Users"], password);
+        if(account_id == "") {
+            jFile["Users"][uuid::generate_uuid()] = temp;
+        }
+        else {
+            jFile["Users"][account_id] = temp;
+        }
+
+        
     }
 
     fstream file("RozemicBanking/json/accounts.json", 
@@ -298,4 +320,17 @@ void UserAccounts::setJson(json obj) {
     file.open("../json/accounts.json", fstream::out | fstream::trunc);
     file << obj;
     file.close();
+}
+
+string UserAccounts::check_pass(json jFile, string pass) {
+    for(auto& el : jFile.items()) {
+        try {
+            if(jFile[el.key()]["CustomerInfo"]["Password"] == pass)
+                return el.key();
+        } catch (json::exception& e) {
+            cout << "An error occurred: " << e.id << endl;
+        }
+    }
+
+    return "";
 }
