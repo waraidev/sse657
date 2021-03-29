@@ -11,34 +11,6 @@
 // #include <vector> and <string> from json.hpp
 #include "../External/json.hpp"
 
-/*
-#include <thread>
-#include <mutex>
-
-	mutex mutually;
-
-	//Setup For Multithreaded Code
-	class thread_guard
-	{
-		private:
-			thread& t;
-		public:
-			explicit thread_guard(thread& t_) : t(t_) { }
-
-			~thread_guard()
-			{
-				if(t.joinable())
-				{
-					t.join();
-				}
-			}
-
-			thread_guard(thread_guard const&)=delete;
-			thread_guard& operator=(thread_guard const&)=delete;
-
-	};
-*/
-
 namespace uuid {
     static std::random_device              rd;
     static std::mt19937                    gen(rd());

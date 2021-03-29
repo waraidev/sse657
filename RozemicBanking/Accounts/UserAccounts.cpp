@@ -231,8 +231,6 @@ json UserAccounts::setJson(
     json jFile) 
     {
 
-    hash<string> str_hash;
-
     if(jFile == NULL) {
         json temp = {
             { "Users", {
