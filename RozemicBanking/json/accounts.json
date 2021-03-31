@@ -3,11 +3,12 @@
         "435f436e-03ba-4314-a566-e93d72465503": {
             "Accounts": {
                 "Checking": {
-                    "Balance": 4300.0,
+                    "Balance": 4220.0,
                     "TransactionLimit": 950.0,
-                    "TransactionTotal": 700.0,
+                    "TransactionTotal": 80.0,
                     "Transactions": [
-                        "Apple withdrew $700 for a purchase of iPhone 12 mini at Mon Mar 29 13:16:04 2021\n"
+                        "Apple withdrew $700 for a purchase of iPhone 12 mini at Mon Mar 29 13:16:04 2021\n",
+                        "Logitech withdrew $80 for a purchase of MX Master mouse at Mon Mar 29 16:15:01 2021\n"
                     ]
                 },
                 "Savings": {
