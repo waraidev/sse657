@@ -70,7 +70,7 @@ int main(void) {
     }
 
     if(accounts == 0) {
-        cout << "We apologize, but this account does not exist!" << endl;
+        cout << "We apologize, but this account either does not exist or your password is incorrect!" << endl;
     } else {
         accountServices(accounts);
 

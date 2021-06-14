@@ -219,6 +219,11 @@ void saveJson(UserAccounts *accounts, json jFile) {
 }
 
 void initAccounts(UserAccounts *accounts, double initBalance) {
+
+    while(initBalance < 0) {
+        cout << "Cannot enter negative amount. Try again!\nAmount: ";
+        cin >> initBalance;
+    }
     BankAccount check = BankAccount(initBalance);
     BankAccount save = BankAccount();
 

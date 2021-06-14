@@ -1,33 +1,34 @@
 {
     "Users": {
-        "435f436e-03ba-4314-a566-e93d72465503": {
+        "d2ae9c7f-9b14-47ab-afd6-e64d4d6bddf1": {
             "Accounts": {
                 "Checking": {
-                    "Balance": 4220.0,
-                    "TransactionLimit": 950.0,
-                    "TransactionTotal": 80.0,
+                    "Balance": -1.0,
+                    "TransactionLimit": 4500.0,
+                    "TransactionTotal": 4301.0,
                     "Transactions": [
-                        "Apple withdrew $700 for a purchase of iPhone 12 mini at Mon Mar 29 13:16:04 2021\n",
-                        "Logitech withdrew $80 for a purchase of MX Master mouse at Mon Mar 29 16:15:01 2021\n"
+                        "Withdrew $500 at Tue May 4 14:09:37 2021\n",
+                        "Apple withdrew $700 for a purchase of iPhone at Tue May 4 17:01:49 2021\n",
+                        "User Car Sales withdrew $4301 for a purchase of 2005 Ford Truck at Tue May 4 17:35:05 2021\n"
                     ]
                 },
                 "Savings": {
-                    "Balance": 50.0,
-                    "TransactionLimit": 950.0,
+                    "Balance": 2000.0,
+                    "TransactionLimit": 4500.0,
                     "TransactionTotal": 0.0,
                     "Transactions": [
-                        "Deposited $50 at Mon Mar 29 12:04:50 2021\n"
+                        "Deposited $2000 at Tue May  4 12:59:41 2021\n"
                     ]
                 }
             },
             "CustomerInfo": {
-                "Address": "32 Tree St",
+                "Address": "1501 Mercer University Dr",
                 "City": "Macon",
                 "FirstName": "Eric",
                 "LastName": "Wiley",
-                "Password": "7091454244313711242",
+                "Password": "5800677940537037149",
                 "State": "GA",
-                "ZipCode": "31200"
+                "ZipCode": "31207"
             }
         }
     }
